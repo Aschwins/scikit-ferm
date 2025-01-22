@@ -20,6 +20,7 @@ jobs:
         python-version: '3.12'
         cache: 'pip' # caching pip dependencies
     - run: pip install pydata-sphinx-theme
+    - run: pip list
     - name: Build HTML
       uses: ammaraskar/sphinx-action@master
     - name: Upload artifacts
