@@ -1,12 +1,26 @@
 [project]
 name = "scikit-ferm"
 version = "0.1.0"
-description = "Add your description here"
+authors = [
+    {name="Aschwin Schilperoort", email="author@example.com"},
+]
+description = "A scikit-learn compatible package for fermentations."
 readme = "README.md"
 requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
 dependencies = [
     "numpy>=2.2.2",
 ]
+license = "Apache-2.0"
+license-files = ["LICEN[CS]E*"]
+keywords = ["python", "fermentation", "scikit-ferm", "acidification"]
+
+[project.urls]
+Homepage = "https://aschwins.github.io/scikit-ferm/"
+Issues = "https://github.com/Aschwins/scikit-ferm/issues"
 
 [project.optional-dependencies]
 docs = [
