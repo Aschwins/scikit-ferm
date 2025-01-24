@@ -1,2 +1,6 @@
 settings.json
 *build/
+*.pyc
+dist/
+.vscode/
+.venv/
