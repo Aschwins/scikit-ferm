@@ -30,8 +30,6 @@ docs = [
 examples = [
     "matplotlib>=3.10.0",
 ]
-
-[dependency-groups]
 dev = [
     "pyright>=1.1.392.post0",
 ]
