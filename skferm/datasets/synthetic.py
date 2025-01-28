@@ -1,8 +1,11 @@
 from skferm.growth_models.logistic import logistic_growth
 import numpy as np
+import numpy.typing as npt
 
 
-def generate_synthetic_growth(time, model="logistic", noise_std=0.0, **kwargs):
+def generate_synthetic_growth(
+    time: npt.ArrayLike, model: str = "logistic", noise_std: float = 0.0, **kwargs
+) -> dict:
     """
     Generate synthetic growth data using specified growth model.
 
@@ -20,6 +23,7 @@ def generate_synthetic_growth(time, model="logistic", noise_std=0.0, **kwargs):
     else:
         raise ValueError(f"Unsupported model: {model}")
 
+    time = np.asarray(time)
     population = growth_function(time, **kwargs)
-    noise = np.random.normal(0, noise_std, size=len(population))
+    noise = np.random.normal(loc=0.0, scale=noise_std, size=len(population))
     return {"time": time, "population": population + noise}
