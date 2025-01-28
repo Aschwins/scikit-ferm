@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def logistic_growth(t, N0, Nmax, r):
+def logistic_growth(t: np.typing.ArrayLike, N0: float, Nmax: float, r: float) -> np.ndarray:
     """
     Simulate microbial growth using the logistic growth model.
 
@@ -14,4 +14,5 @@ def logistic_growth(t, N0, Nmax, r):
     Returns:
     - array-like: Population at each time point.
     """
+    t = np.asarray(t)
     return Nmax / (1 + ((Nmax - N0) / N0) * np.exp(-r * t))
