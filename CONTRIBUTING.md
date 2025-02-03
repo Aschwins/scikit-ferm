@@ -17,3 +17,15 @@ Releases are done by the maintainers of the project. To make a release, follow t
 uvx ruff check
 uvx ruff format
 ```
+
+# Static type checking
+
+```bash
+pyright
+``` 
+
+# Testing
+
+```bash
+pytest
+```
