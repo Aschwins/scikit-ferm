@@ -13,7 +13,7 @@ def test_generate_synthetic_growth_logistic_no_noise():
 
 def test_generate_synthetic_growth_logistic_with_noise():
     time = np.linspace(0, 10, 100)
-    noise_std = 0.5
+    noise_std = 0.1
     result = generate_synthetic_growth(time, model="logistic", noise_std=noise_std, r=0.1, Nmax=100, N0=1)
     assert "time" in result
     assert "population" in result
