@@ -634,7 +634,7 @@ dependencies = [
     { name = "numpy" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "pre-commit" },
     { name = "pyright" },
@@ -649,15 +649,19 @@ examples = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "matplotlib", marker = "extra == 'examples'", specifier = ">=3.10.0" },
-    { name = "numpy", specifier = ">=2.2.2" },
-    { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.1.0" },
-    { name = "pydata-sphinx-theme", marker = "extra == 'docs'", specifier = ">=0.16.1" },
-    { name = "pyright", marker = "extra == 'dev'", specifier = ">=1.1.392.post0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.3.4" },
-    { name = "sphinx", marker = "extra == 'docs'", specifier = ">=8.1.3" },
+requires-dist = [{ name = "numpy", specifier = ">=2.2.2" }]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pre-commit", specifier = ">=4.1.0" },
+    { name = "pyright", specifier = ">=1.1.392.post0" },
+    { name = "pytest", specifier = ">=8.3.4" },
 ]
+docs = [
+    { name = "pydata-sphinx-theme", specifier = ">=0.16.1" },
+    { name = "sphinx", specifier = ">=8.1.3" },
+]
+examples = [{ name = "matplotlib", specifier = ">=3.10.0" }]
 
 [[package]]
 name = "six"

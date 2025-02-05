@@ -28,10 +28,7 @@ jobs:
         run: uv python install 3.12
 
       - name: Create venv
-        run: uv venv
-
-      - name: Install dependencies
-        run: uv pip install -r pyproject.toml --extra dev
+        run: uv sync
 
       - name: Run Pyright
         run: |
