@@ -22,7 +22,7 @@ uvx ruff format
 
 ```bash
 pyright
-``` 
+```
 
 # Testing
 

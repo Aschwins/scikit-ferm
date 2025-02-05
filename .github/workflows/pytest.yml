@@ -26,7 +26,7 @@ jobs:
 
       - name: Set up Python
         run: uv python install 3.12
-      
+
       - name: Create venv
         run: uv venv
 
@@ -35,9 +35,8 @@ jobs:
 
       - name: Install scikit-ferm
         run: uv pip install .
-      
+
       - name: Run Pytest
         run: |
           source .venv/bin/activate
           pytest
-        

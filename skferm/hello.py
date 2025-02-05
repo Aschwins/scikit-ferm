@@ -1,5 +1,10 @@
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
+
 def main() -> None:
-    print("Hello from scikit-ferm!")
+    logging.info("Hello, World!")
 
 
 if __name__ == "__main__":

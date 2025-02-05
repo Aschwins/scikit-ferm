@@ -1,11 +1,10 @@
-from skferm.growth_models.logistic import logistic_growth
 import numpy as np
 import numpy.typing as npt
 
+from skferm.growth_models.logistic import logistic_growth
 
-def generate_synthetic_growth(
-    time: npt.ArrayLike, model: str = "logistic", noise_std: float = 0.0, **kwargs
-) -> dict:
+
+def generate_synthetic_growth(time: npt.ArrayLike, model: str = "logistic", noise_std: float = 0.0, **kwargs) -> dict:
     """
     Generate synthetic growth data using specified growth model.
 
