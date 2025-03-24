@@ -1,7 +1,9 @@
 import numpy as np
 
 
-def logistic_growth(t: np.typing.ArrayLike, N0: float, Nmax: float, r: float) -> np.ndarray:
+def logistic_growth(
+    t: np.typing.ArrayLike, N0: float, Nmax: float, r: float
+) -> np.ndarray:
     """
     Simulate microbial growth using the logistic growth model.
 

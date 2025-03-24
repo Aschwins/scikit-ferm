@@ -1,4 +1,5 @@
 from skferm.growth_models.logistic import logistic_growth
+from skferm.growth_models.gompertz import gompertz, modified_gompertz
 import numpy as np
 import numpy.typing as npt
 
@@ -20,6 +21,10 @@ def generate_synthetic_growth(
     """
     if model == "logistic":
         growth_function = logistic_growth
+    elif model == "gompertz":
+        growth_function = gompertz
+    elif model == "modified_gompertz":
+        growth_function = modified_gompertz
     else:
         raise ValueError(f"Unsupported model: {model}")
 
