@@ -26,18 +26,11 @@ jobs:
 
       - name: Set up Python
         run: uv python install 3.12
-      
+
       - name: Create venv
-        run: uv venv
+        run: uv sync
 
-      - name: Install dependencies
-        run: uv pip install -r pyproject.toml --extra dev
-
-      - name: Install scikit-ferm
-        run: uv pip install .
-      
       - name: Run Pytest
         run: |
           source .venv/bin/activate
           pytest
-        

@@ -1,4 +1,5 @@
 import numpy as np
+
 from skferm.growth_models.gompertz import gompertz, modified_gompertz
 
 
