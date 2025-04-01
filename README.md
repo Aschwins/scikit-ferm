@@ -36,3 +36,13 @@ uv sync
 - `skferm.datasets.generate_synthetic_growth` Generate synthetic fermentation datasets
 - `skferm.growth_models.gompertz` Gompertz growth model
 - `skferm.growth_models.logistic` Logistic growth model
+
+
+## Examples
+
+Marimo notebooks are used to demonstrate examples. You can find the notebooks in the `examples` directory. Each example describes a use case. To run the examples you need to install scikit-ferm with an additional dependencies and start marimo.
+
+```bash
+uv sync
+marimo edit
+```

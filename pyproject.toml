@@ -13,6 +13,8 @@ classifiers = [
 ]
 dependencies = [
     "numpy>=2.2.2",
+    "pandas>=2.2.3",
+    "scikit-learn>=1.6.1",
 ]
 license = "Apache-2.0"
 license-files = ["LICEN[CS]E*"]
@@ -31,6 +33,7 @@ examples = [
     "matplotlib>=3.10.0",
 ]
 dev = [
+    "marimo>=0.12.0",
     "pre-commit>=4.1.0",
     "pyright>=1.1.392.post0",
     "pytest>=8.3.4",
