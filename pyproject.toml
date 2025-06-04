@@ -58,9 +58,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.sdist]
 packages = ["skferm"]
+include = ["skferm/data/**"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["skferm"]
+include = ["skferm/data/**"]
 
 [tool.pyright]
 include = ["skferm"]
