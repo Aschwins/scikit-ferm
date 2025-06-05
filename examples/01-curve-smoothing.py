@@ -21,7 +21,7 @@ def _(mo):
         r"""
         # Curve Smoothing
 
-        Curve smoothing is used for noisy fermentation time series. `sk-ferm` has the `smoothing` module to deal with these nasty curves. In this notebook we describe two different cases of curve smoothing.
+        Curve smoothing is used for noisy fermentation time series. `scikit-ferm` has the `smoothing` module to deal with these curves. In this notebook we describe two different cases of curve smoothing.
 
         ## Infrequent timepoints
         Here we want to interpolate between the measured timepoints. We have a lot of time between the measurements, so we can use a spline interpolation to fill in the gaps.
@@ -29,10 +29,7 @@ def _(mo):
         ## Frequent timepoints
         Here we want to filter the noise from the data, so we can use a moving average or a Savitzky-Golay filter. The Savitzky-Golay filter is a popular method for smoothing data while preserving important features such as peak height and width. It works by fitting successive sub-sets of adjacent data points with a low-degree polynomial by the method of linear least squares.
 
-        ## TODO: Regression models
-
         ## Examples with more than 1 time series in the dataset.
-
 
         Each smoother works on some x and y data. The x and y data should resemble a single a curve. A smoother is created and can be call on a new domain to either get more frequent interpolated timepoints of your curve or smoothed out / noise filtered out curves.
         """
@@ -41,18 +38,58 @@ def _(mo):
 
 
 @app.cell
-def _(logger):
+def _(mo):
+    mo.md(r"""# Imports""")
+    return
+
+
+@app.cell
+def _():
     import matplotlib.pyplot as plt
     import numpy as np
     import pandas as pd
     from scipy.interpolate import interp1d
     from scipy.signal import savgol_filter
 
+    from skferm.datasets.rheolaser import load_rheolaser_data
     from skferm.datasets.synthetic import generate_synthetic_growth
-    from skferm.smoothing.moving_average import moving_average
-    from skferm.smoothing.savgol_filter import savitzky_golay
-    from skferm.smoothing.transformer import SmoothingTransformer
+    from skferm.smoothing.pipe import smooth
 
+    plt.rcParams.update(
+        {
+            "font.size": 8,
+            "axes.labelsize": 10,
+            "axes.titlesize": 12,
+            "xtick.labelsize": 8,
+            "ytick.labelsize": 8,
+            "legend.fontsize": 8,
+            "figure.dpi": 300,  # For print quality
+            "figure.figsize": [4, 3],  # Size in inches (typical for 1-column paper figs)
+            "axes.grid": True,
+            "grid.alpha": 0.3,
+        }
+    )
+
+    return (
+        generate_synthetic_growth,
+        interp1d,
+        load_rheolaser_data,
+        np,
+        pd,
+        plt,
+        savgol_filter,
+        smooth,
+    )
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""# Infrequent Timepoints""")
+    return
+
+
+@app.cell
+def _(generate_synthetic_growth, logger, np, pd):
     # Define time points
     time_points = np.linspace(0, 300, int(300 / 30))
 
@@ -70,135 +107,77 @@ def _(logger):
     df = pd.DataFrame({"time": synthetic_data["time"], "population": synthetic_data["population"], "sample_id": "A"})
 
     logger.info(df.head())
-    return (
-        SmoothingTransformer,
-        df,
-        generate_synthetic_growth,
-        interp1d,
-        moving_average,
-        np,
-        pd,
-        plt,
-        savgol_filter,
-        savitzky_golay,
-        synthetic_data,
-        time_points,
-    )
+    return df, synthetic_data, time_points
 
 
 @app.cell
 def _(df, plt):
-    plt.plot(df["time"], df["population"], label="Original")
-    plt.xlabel("Time")
+    fig = plt.figure(figsize=(8, 4))
+    plt.scatter(df["time"], df["population"], label="Original")
+    plt.xlabel("Time (minutes)")
     plt.ylabel("Population")
-    return
+    plt.title("Logistic Growth Data")
+    return (fig,)
 
 
 @app.cell
-def _(mo):
+def _(mo, time_points):
     mo.md(
-        r"""
+        rf"""
         Here we have a nice fermentation curve, where some microbe is grown. There are two problems with this dataset.
 
         1. The data is noisy, there are some up and downshifts in the meaurements
-        2. We have measured frequency of 1 measurement per 2 minutes.
+        2. We have measured frequency of 1 measurement per ~{time_points[1] - time_points[0]:.0f} minutes.
 
-        This can both be solved by curve smoothing.
+        This can both be solved by curve smoothing.)
         """
     )
     return
 
 
 @app.cell
-def _():
-    from skferm.smoothing.spline import FermentationCurveSmoother
-
-    return (FermentationCurveSmoother,)
-
-
-@app.cell
-def _(df, mo):
-    x = df.time.values
-    y = df.population.values
-
-    smoothing_factor = mo.ui.slider(0, 1000, 0.05)
-    return smoothing_factor, x, y
-
-
-@app.cell
-def _(FermentationCurveSmoother, np, smoothing_factor, x, y):
-    fcm = FermentationCurveSmoother(x=x, y=y, smoothing_factor=smoothing_factor.value)
-    new_x = np.arange(0, 300, 1)
-    y_smooth = fcm.get_smoothed_values(new_x)
-    return fcm, new_x, y_smooth
-
-
-@app.cell
 def _(mo):
-    k = mo.ui.slider(1, 5, 1)
-    return (k,)
-
-
-@app.cell
-def _(k, smoothing_factor, x, y):
-    from scipy.interpolate import UnivariateSpline
-
-    spl = UnivariateSpline(x, y, s=smoothing_factor.value, k=k.value)
-    return UnivariateSpline, spl
-
-
-@app.cell
-def _(k, smoothing_factor):
-    smoothing_factor, k
+    mo.md(r"""# Frequent Time Points""")
     return
 
 
 @app.cell
-def _(new_x, plt, spl, x, y):
-    plt.scatter(new_x, spl(new_x))
-    plt.scatter(x, y, alpha=0.2)
-    return
+def _(load_rheolaser_data):
+    df2 = load_rheolaser_data()
+    df2.head(2)
+    return (df2,)
 
 
 @app.cell
-def _(interp1d, np, savgol_filter):
-    def savitzky_golay2(data, time=None, window_size=4, poly_order=2):
-        """
-        Apply Savitzky-Golay smoothing and return an interpolator.
-
-        Parameters:
-        - data: np.ndarray
-            1D array of data points to smooth.
-        - time: np.ndarray or None
-            1D array of time points corresponding to the data. If None, indices are used.
-        - window_size: int
-            Window size for the Savitzky-Golay filter.
-        - poly_order: int
-            Polynomial order for the Savitzky-Golay filter.
-
-        Returns:
-        - smoothed: np.ndarray
-            Smoothed data points.
-        - interpolator: Callable
-            A function that interpolates the smoothed data at arbitrary time points.
-        """
-        if time is None:
-            time = np.arange(len(data))
-
-        # Apply Savitzky-Golay filter
-        smoothed = savgol_filter(data, window_size, poly_order)
-
-        # Create an interpolator for the smoothed data
-        interpolator = interp1d(time, smoothed, kind="linear", fill_value="extrapolate")
-
-        return smoothed, interpolator
-
-    return (savitzky_golay2,)
+def _(df2, plt):
+    fig2 = plt.figure(figsize=(8, 4))
+    plt.scatter(df2["time"], df2["elasticity_index"], c=df2["sample_id"].factorize()[0], alpha=0.5)
+    plt.xlabel("Time (minutes)")
+    plt.ylabel("Elasticity Index")
+    plt.title("Raw Rheolaser Data")
+    return (fig2,)
 
 
 @app.cell
-def _():
-    return
+def _(df2, smooth):
+    smoothed_df2 = smooth(df2, x="time", y="elasticity_index", groupby_col="sample_id")
+    smoothed_df2.head(2)
+    return (smoothed_df2,)
+
+
+@app.cell
+def _(plt, smoothed_df2):
+    fig3 = plt.figure(figsize=(8, 4))
+    plt.scatter(
+        smoothed_df2["time"],
+        smoothed_df2["elasticity_index_smooth"],
+        c=smoothed_df2["sample_id"].factorize()[0],
+        alpha=0.5,
+    )
+    plt.xlabel("Time (minutes)")
+    plt.ylabel("Elasticity Index")
+    plt.title("Raw Rheolaser Data")
+    return (fig3,)
 
 
 if __name__ == "__main__":
