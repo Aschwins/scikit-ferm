@@ -69,7 +69,6 @@ def _():
             "grid.alpha": 0.3,
         }
     )
-
     return (
         generate_synthetic_growth,
         interp1d,
@@ -160,7 +159,7 @@ def _(df2, plt):
 
 @app.cell
 def _(df2, smooth):
-    smoothed_df2 = smooth(df2, x="time", y="elasticity_index", groupby_col="sample_id")
+    smoothed_df2 = smooth(df2, x="time", y="elasticity_index", groupby_col="sample_id", window=10)
     smoothed_df2.head(2)
     return (smoothed_df2,)
 
@@ -178,6 +177,17 @@ def _(plt, smoothed_df2):
     plt.ylabel("Elasticity Index")
     plt.title("Raw Rheolaser Data")
     return (fig3,)
+
+
+@app.cell
+def _(df2):
+    df2["time"]
+    return
+
+
+@app.cell
+def _():
+    return
 
 
 if __name__ == "__main__":

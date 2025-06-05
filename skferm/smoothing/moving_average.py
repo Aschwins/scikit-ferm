@@ -1,18 +1,10 @@
-import numpy as np
+def rolling_average(df, x: str, y: str, window: int):
+    df = df.sort_values(x)
+    df[f"{y}_smooth"] = df[y].rolling(window=window, center=True, min_periods=1).mean()
+    return df
 
 
-def moving_average(data, window_size):
-    """
-    Apply a moving average to the data.
-
-    Parameters:
-    - data: np.ndarray
-        1D array of data points.
-    - window_size: int
-        Size of the moving average window.
-
-    Returns:
-    - np.ndarray
-        Smoothed data.
-    """
-    return np.convolve(data, np.ones(window_size) / window_size, mode="valid")
+def exponential_moving_average(df, x: str, y: str, span: int):
+    df = df.sort_values(x)
+    df[f"{y}_smooth"] = df[y].ewm(span=span, adjust=False).mean()
+    return df
