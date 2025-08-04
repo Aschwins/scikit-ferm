@@ -29,3 +29,22 @@ pyright
 ```bash
 pytest
 ```
+
+# Docs
+
+To build the documentation, you need to have `sphinx` installed. You can install it with:
+
+```bash
+uv sync --group docs
+```
+
+Then, you can build the documentation with:
+
+```bash
+source .venv/bin/activate
+sphinx-build -b html docs/source docs/build
+```
+
+```bash
+sphinx-apidoc -o docs/source/ skferm
+```
