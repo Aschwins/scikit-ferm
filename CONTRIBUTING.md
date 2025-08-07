@@ -45,6 +45,20 @@ source .venv/bin/activate
 sphinx-build -b html docs/source docs/build
 ```
 
+To generate the API documentation, you can use `sphinx-apidoc`. Run the following command to generate the API documentation from the source code:
+
 ```bash
 sphinx-apidoc -o docs/source/ skferm
+```
+
+All of this is automated in the Makefile, so you can also run:
+
+```bash
+make dev
+```
+
+With `make dev`, you automatically run autodoc and build the documentation in one go. It will then start a local server to preview the documentation. You can access it at `http://localhost:8000`. If you are using WSL, you might need to use the command below to get the correct URL:
+
+```bash
+echo "Documentation server: http://$(hostname -I | cut -d' ' -f1):8000"
 ```

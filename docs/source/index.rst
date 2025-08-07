@@ -24,7 +24,7 @@ Contents
    :maxdepth: 2
 
    usage
-   api
+   skferm
 
 Indices and tables
 ==================

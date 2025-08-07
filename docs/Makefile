@@ -1,20 +1,34 @@
-# Minimal makefile for Sphinx documentation
-#
+SOURCEDIR = source
+BUILDDIR = build
+APIDOCDIR = source
+PACKAGEDIR = ../skferm
 
-# You can set these variables from the command line, and also
-# from the environment for the first two.
-SPHINXOPTS    ?=
-SPHINXBUILD   ?= sphinx-build
-SOURCEDIR     = source
-BUILDDIR      = build
+.PHONY: help clean html apidoc serve dev
 
-# Put it first so that "make" without argument is like "make help".
 help:
-	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "  html       to make standalone HTML files"
+	@echo "  apidoc     to generate API documentation"
+	@echo "  serve      to serve the documentation"
+	@echo "  dev        to generate API docs and serve with auto-rebuild"
+	@echo "  clean      to clean build directory"
 
-.PHONY: help Makefile
+clean:
+	rm -rf $(BUILDDIR)/*
 
-# Catch-all target: route all unknown targets to Sphinx using the new
-# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
-%: Makefile
-	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+apidoc:
+	sphinx-apidoc -o $(APIDOCDIR) $(PACKAGEDIR) --force
+
+html: apidoc
+	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)
+
+serve: html
+	python -m http.server -d $(BUILDDIR) 8080
+
+dev: apidoc
+	@echo "Starting development server..."
+	@echo "Documentation will be available at:"
+	@echo "  WSL2 IP: http://$$(hostname -I | cut -d' ' -f1):8000"
+	@echo "  (VSCode port forwarding: http://localhost:8000 - may not work)"
+	@echo ""
+	sphinx-autobuild $(SOURCEDIR) $(BUILDDIR) --open-browser --watch $(PACKAGEDIR) --host 0.0.0.0 --port 8000

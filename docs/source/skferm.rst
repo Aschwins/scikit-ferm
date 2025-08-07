@@ -10,6 +10,7 @@ Subpackages
    skferm.data
    skferm.datasets
    skferm.growth_models
+   skferm.interpolate
    skferm.smoothing
 
 Submodules
