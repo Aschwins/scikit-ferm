@@ -126,3 +126,13 @@ The package also provides utilities for cleaning and preprocessing experimental 
    cleaned_df = clean_rheolaser(raw_df, cutoff=48)  # Keep only first 48 hours
 
 The ``clean_rheolaser`` function transforms the wide format output from Rheolaser instruments into a tidy long format suitable for analysis and visualization.
+
+Curve Smoothing
+----------------
+
+Scikit-ferm includes a curve smoothing utility to help with noisy fermentation data. This is particularly useful for visualizing trends in growth curves.
+
+Growth Models
+----------------
+
+Scikit-ferm provides implementations of several growth models commonly used in fermentation analysis:
