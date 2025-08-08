@@ -1,0 +1,20 @@
+name: 'Setup Python with uv'
+description: 'Install uv, setup Python 3.12, and sync dependencies using uv.lock'
+author: 'Your Name'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
+      with:
+        enable-cache: true
+        cache-dependency-glob: uv.lock
+
+    - name: Set up Python
+      run: uv python install 3.12
+      shell: bash
+
+    - name: Create venv and install dependencies
+      run: uv sync --all-groups
+      shell: bash

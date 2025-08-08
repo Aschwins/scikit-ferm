@@ -9,13 +9,15 @@ def generate_synthetic_growth(time: npt.ArrayLike, model: str = "logistic", nois
     """
     Generate synthetic growth data using specified growth model.
 
-    Parameters:
+    Parameters
+    ----------
     - time (array-like): Time points.
     - model (str): Growth model to use ("logistic", "monod", etc.).
     - noise_std (float): Standard deviation of Gaussian noise to add.
-    - **kwargs: Parameters for the growth model.
+    **kwargs: Parameters for the growth model.
 
-    Returns:
+    Returns
+    -------
     - dict: A dictionary with time and population arrays.
     """
     if model == "logistic":

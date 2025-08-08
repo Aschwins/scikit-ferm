@@ -31,8 +31,22 @@ git clone https://github.com/Aschwins/scikit-ferm.git
 uv sync
 ```
 
-## Features
+## Use cases
 
-- `skferm.datasets.generate_synthetic_growth` Generate synthetic fermentation datasets
-- `skferm.growth_models.gompertz` Gompertz growth model
-- `skferm.growth_models.logistic` Logistic growth model
+| Use Case | Modules | Notebook | Documentation |
+|----------|---------|----------|---------------|
+| Generate synthetic fermentation datasets | •[`skferm.datasets.generate_synthetic_growth`](skferm/datasets.py)<br> •[`skferm.datasets.rheolaser`](skferm/datasets/rheolaser.py) | [📓 Notebook](notebooks/01-curve-smoothing.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/usage.html#datasets) |
+| Growth modeling | • [`skferm.growth_models.gompertz`](skferm/growth_models/gompertz.py)<br>• [`skferm.growth_models.logistic`](skferm/growth_models/logistic.py) | [📓 Notebook](notebooks/02-gompertz-model.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/usage.html#growth_models) |
+| Curve smoothing | • [`skferm.curve_smoothing.smooth`](skferm/curve_smoothing/smooth.py) | [📓 Notebook](notebooks/03-curve-smoothing.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/usage.html#curve_smoothing) |
+
+
+http://172.18.195.64:8000/
+
+## Examples
+
+Jupyter notebooks are used to demonstrate examples. You can find the notebooks in the `notebooks` directory. Each example describes a use case. To run the examples you need to install scikit-ferm with an additional dependencies and start Jupyter Lab.
+
+```bash
+uv sync
+jupyter lab
+```

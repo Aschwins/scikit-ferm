@@ -21,5 +21,14 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 2
 
    usage
+   skferm
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

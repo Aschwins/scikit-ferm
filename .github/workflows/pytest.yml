@@ -1,5 +1,3 @@
-# pytest.yml
-
 name: "Pytest: Running Tests"
 
 on:
@@ -8,28 +6,16 @@ on:
       - main
   pull_request:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
 
 jobs:
-  run:
-    name: "type-check"
+  run-pytest:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-          cache-dependency-glob: uv.lock
-
-      - name: Set up Python
-        run: uv python install 3.12
-
-      - name: Create venv
-        run: uv sync
-
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python and dependencies
+        uses: ./.github/actions/setup-python-uv
       - name: Run Pytest
         run: |
           source .venv/bin/activate
