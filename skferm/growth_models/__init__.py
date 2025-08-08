@@ -1,7 +1,7 @@
-from .gompertz import gompertz
+from .gompertz import modified_gompertz
 from .logistic import logistic_growth
 
 __all__ = [
-    "gompertz",
+    "modified_gompertz",
     "logistic_growth",
 ]

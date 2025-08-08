@@ -1,30 +1,20 @@
-# publish.yml
-
 name: "Publish"
 
 on:
   release:
-    types: ["published"]
+    types:
+      - published
 
 jobs:
-  run:
+  build-and-publish:
     name: "Build and publish release"
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-          cache-dependency-glob: uv.lock
-
-      - name: Set up Python
-        run: uv python install 3.12
-
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Python and dependencies
+        uses: ./.github/actions/setup-python-uv
       - name: Build
         run: uv build
-
       - name: Publish
         run: uv publish -t ${{ secrets.PYPI_TOKEN }}

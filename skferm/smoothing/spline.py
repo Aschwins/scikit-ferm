@@ -1,10 +1,12 @@
-from scipy.interpolate import UnivariateSpline
+from scipy.interpolate import make_splrep
 
 
 class FermentationCurveSmoother:
     def __init__(self, x, y, smoothing_factor=None):
         """Initialize the curve smoother."""
-        self.spline = UnivariateSpline(x, y, s=smoothing_factor, k=3)
+        # Default smoothing_factor to 0 (interpolation) if None
+        s = smoothing_factor if smoothing_factor is not None else 0
+        self.spline = make_splrep(x, y, s=s, k=3)
 
     def get_smoothed_values(self, new_x):
         """Get smoothed values at given new_x."""

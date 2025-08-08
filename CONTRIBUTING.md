@@ -62,3 +62,12 @@ With `make dev`, you automatically run autodoc and build the documentation in on
 ```bash
 echo "Documentation server: http://$(hostname -I | cut -d' ' -f1):8000"
 ```
+
+# Github Actions
+
+To run the GitHub Actions locally, you can use the `act` tool. Make sure you have it installed. You can run the actions in offline mode to test them without needing to push to GitHub:
+
+```bash
+act --action-offline-mode
+act --action-offline-mode -W '.github/workflows/sphinx.yml'  # or only the docs
+```

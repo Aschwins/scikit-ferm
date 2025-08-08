@@ -48,7 +48,8 @@ autodoc_default_options = {
     'member-order': 'bysource',
     'special-members': '__init__',
     'undoc-members': True,
-    'exclude-members': '__weakref__'
+    'exclude-members': '__weakref__',
+    'imported-members': False
 }
 add_module_names = False
 autosummary_generate = True
@@ -65,3 +66,4 @@ intersphinx_mapping = {
     'numpy': ('https://numpy.org/doc/stable/', None),
     'scipy': ('https://docs.scipy.org/doc/scipy/', None),
 }
+suppress_warnings = ['autodoc.imported_members', 'ref.footnote']

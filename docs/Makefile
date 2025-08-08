@@ -17,13 +17,18 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 apidoc:
-	sphinx-apidoc -o $(APIDOCDIR) $(PACKAGEDIR) --force
+	sphinx-apidoc -o $(APIDOCDIR) $(PACKAGEDIR) --force --no-toc
 
 html: apidoc
 	sphinx-build -b html $(SOURCEDIR) $(BUILDDIR)
 
 serve: html
-	python -m http.server -d $(BUILDDIR) 8080
+	@echo "Starting development server..."
+	@echo "Documentation will be available at:"
+	@echo "  WSL2 IP: http://$$(hostname -I | cut -d' ' -f1):8000"
+	@echo "  (VSCode port forwarding: http://localhost:8000 - may not work)"
+	@echo ""
+	python -m http.server -d $(BUILDDIR) 8000
 
 dev: apidoc
 	@echo "Starting development server..."
