@@ -1,5 +1,5 @@
 SOURCEDIR = source
-BUILDDIR = build
+BUILDDIR = _build
 APIDOCDIR = source
 PACKAGEDIR = ../skferm
 
