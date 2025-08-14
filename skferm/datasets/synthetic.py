@@ -1,11 +1,14 @@
 import numpy as np
 import numpy.typing as npt
+import pandas as pd
 
 from skferm.growth_models.gompertz import gompertz, modified_gompertz
 from skferm.growth_models.logistic import logistic_growth
 
 
-def generate_synthetic_growth(time: npt.ArrayLike, model: str = "logistic", noise_std: float = 0.0, **kwargs) -> dict:
+def generate_synthetic_growth(
+    time: npt.ArrayLike, model: str = "logistic", noise_std: float = 0.0, **kwargs
+) -> pd.DataFrame:
     """
     Generate synthetic growth data using specified growth model.
 
@@ -32,4 +35,4 @@ def generate_synthetic_growth(time: npt.ArrayLike, model: str = "logistic", nois
     time = np.asarray(time)
     population = growth_function(time, **kwargs)
     noise = np.random.normal(loc=0.0, scale=noise_std, size=len(population))
-    return {"time": time, "population": population + noise}
+    return pd.DataFrame({"time": time, "population": population + noise})
