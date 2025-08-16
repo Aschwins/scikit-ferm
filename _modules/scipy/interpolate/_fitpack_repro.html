@@ -1,0 +1,1383 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>scipy.interpolate._fitpack_repro &#8212; scikit-ferm  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/scipy/interpolate/_fitpack_repro';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">scikit-ferm  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../skferm.html">
+    skferm package
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aschwins/scikit-ferm" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../skferm.html">
+    skferm package
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aschwins/scikit-ferm" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">scipy.interpolate._fitpack_repro</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for scipy.interpolate._fitpack_repro</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot; Replicate FITPACK&#39;s logic for constructing smoothing spline functions and curves.</span>
+
+<span class="sd">    Currently provides analogs of splrep and splprep python routines, i.e.</span>
+<span class="sd">    curfit.f and parcur.f routines (the drivers are fpcurf.f and fppara.f, respectively)</span>
+
+<span class="sd">    The Fortran sources are from</span>
+<span class="sd">    https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/</span>
+
+<span class="sd">    .. [1] P. Dierckx, &quot;Algorithms for smoothing data with periodic and</span>
+<span class="sd">        parametric splines, Computer Graphics and Image Processing&quot;,</span>
+<span class="sd">        20 (1982) 171-184.</span>
+<span class="sd">        :doi:`10.1016/0146-664X(82)90043-0`.</span>
+<span class="sd">    .. [2] P. Dierckx, &quot;Curve and surface fitting with splines&quot;, Monographs on</span>
+<span class="sd">         Numerical Analysis, Oxford University Press, 1993.</span>
+<span class="sd">    .. [3] P. Dierckx, &quot;An algorithm for smoothing, differentiation and integration</span>
+<span class="sd">         of experimental data using spline functions&quot;,</span>
+<span class="sd">         Journal of Computational and Applied Mathematics, vol. I, no 3, p. 165 (1975).</span>
+<span class="sd">         https://doi.org/10.1016/0771-050X(75)90034-0</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">operator</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">._bsplines</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">_not_a_knot</span><span class="p">,</span> <span class="n">make_interp_spline</span><span class="p">,</span> <span class="n">BSpline</span><span class="p">,</span> <span class="n">fpcheck</span><span class="p">,</span> <span class="n">_lsq_solve_qr</span>
+<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_dierckx</span>      <span class="c1"># type: ignore[attr-defined]</span>
+
+
+<span class="c1">#    cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</span>
+<span class="c1">#    c  part 1: determination of the number of knots and their position     c</span>
+<span class="c1">#    c  **************************************************************      c</span>
+<span class="c1">#</span>
+<span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L31</span>
+
+
+<span class="c1"># Hardcoded in curfit.f</span>
+<span class="n">TOL</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">MAXIT</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_residuals</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+    <span class="c1"># FITPACK has (w*(spl(x)-y))**2; make_lsq_spline has w*(spl(x)-y)**2</span>
+    <span class="n">w2</span> <span class="o">=</span> <span class="n">w</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="c1"># inline the relevant part of</span>
+    <span class="c1"># &gt;&gt;&gt; spl = make_lsq_spline(x, y, w=w2, t=t, k=k)</span>
+    <span class="c1"># NB:</span>
+    <span class="c1">#     1. y is assumed to be 2D here. For 1D case (parametric=False),</span>
+    <span class="c1">#        the call must have been preceded by y = y[:, None] (cf _validate_inputs)</span>
+    <span class="c1">#     2. We always sum the squares across axis=1:</span>
+    <span class="c1">#         * For 1D (parametric=False), the last dimension has size one,</span>
+    <span class="c1">#           so the summation is a no-op.</span>
+    <span class="c1">#         * For 2D (parametric=True), the summation is actually how the</span>
+    <span class="c1">#           &#39;residuals&#39; are defined, see Eq. (42) in Dierckx1982</span>
+    <span class="c1">#           (the reference is in the docstring of `class F`) below.</span>
+    <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">_lsq_solve_qr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">spl</span> <span class="o">=</span> <span class="n">BSpline</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_compute_residuals</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">spl</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_residuals</span><span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">splx</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="p">((</span><span class="n">splx</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w2</span> <span class="o">*</span> <span class="n">delta</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">add_knot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">residuals</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add a new knot.</span>
+
+<span class="sd">    (Approximately) replicate FITPACK&#39;s logic:</span>
+<span class="sd">      1. split the `x` array into knot intervals, ``t(j+k) &lt;= x(i) &lt;= t(j+k+1)``</span>
+<span class="sd">      2. find the interval with the maximum sum of residuals</span>
+<span class="sd">      3. insert a new knot into the middle of that interval.</span>
+
+<span class="sd">    NB: a new knot is in fact an `x` value at the middle of the interval.</span>
+<span class="sd">    So *the knots are a subset of `x`*.</span>
+
+<span class="sd">    This routine is an analog of</span>
+<span class="sd">    https://github.com/scipy/scipy/blob/v1.11.4/scipy/interpolate/fitpack/fpcurf.f#L190-L215</span>
+<span class="sd">    (cf _split function)</span>
+
+<span class="sd">    and https://github.com/scipy/scipy/blob/v1.11.4/scipy/interpolate/fitpack/fpknot.f</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_knot</span> <span class="o">=</span> <span class="n">_dierckx</span><span class="o">.</span><span class="n">fpknot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
+
+    <span class="n">idx_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">new_knot</span><span class="p">)</span>
+    <span class="n">t_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">t</span><span class="p">[:</span><span class="n">idx_t</span><span class="p">],</span> <span class="n">new_knot</span><span class="p">,</span> <span class="n">t</span><span class="p">[</span><span class="n">idx_t</span><span class="p">:]]</span>
+    <span class="k">return</span> <span class="n">t_new</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_validate_inputs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="n">parametric</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Common input validations for generate_knots and make_splrep.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">ndim</span><span class="w"> </span><span class="si">= }</span><span class="s2"> not implemented yet.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Weights must be non-negative&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="w"> </span><span class="si">= }</span><span class="s2"> not supported (must be 1 or 2.)&quot;</span><span class="p">)</span>
+
+    <span class="n">parametric</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">parametric</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">parametric</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="w"> </span><span class="si">= }</span><span class="s2"> != 2 not supported with </span><span class="si">{</span><span class="n">parametric</span><span class="w"> </span><span class="si">=}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="w"> </span><span class="si">= }</span><span class="s2"> != 1 not supported with </span><span class="si">{</span><span class="n">parametric</span><span class="w"> </span><span class="si">=}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="c1"># all _impl functions expect y.ndim = 2</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Weights is incompatible: </span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">=}</span><span class="s2"> != </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Data is incompatible: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">= }</span><span class="s2"> and </span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="w"> </span><span class="si">= }</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Expect `x` to be an ordered 1D sequence.&quot;</span><span class="p">)</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="n">operator</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`s` must be non-negative. Got </span><span class="si">{</span><span class="n">s</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">xb</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xe</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xe</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_knots</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Replicate FITPACK&#39;s constructing the knot vector.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y : array_like</span>
+<span class="sd">        The data points defining the curve ``y = f(x)``.</span>
+<span class="sd">    w : array_like, optional</span>
+<span class="sd">        Weights.</span>
+<span class="sd">    xb : float, optional</span>
+<span class="sd">        The boundary of the approximation interval. If None (default),</span>
+<span class="sd">        is set to ``x[0]``.</span>
+<span class="sd">    xe : float, optional</span>
+<span class="sd">        The boundary of the approximation interval. If None (default),</span>
+<span class="sd">        is set to ``x[-1]``.</span>
+<span class="sd">    k : int, optional</span>
+<span class="sd">        The spline degree. Default is cubic, ``k = 3``.</span>
+<span class="sd">    s : float, optional</span>
+<span class="sd">        The smoothing factor. Default is ``s = 0``.</span>
+<span class="sd">    nest : int, optional</span>
+<span class="sd">        Stop when at least this many knots are placed.</span>
+
+<span class="sd">    Yields</span>
+<span class="sd">    ------</span>
+<span class="sd">    t : ndarray</span>
+<span class="sd">        Knot vectors with an increasing number of knots.</span>
+<span class="sd">        The generator is finite: it stops when the smoothing critetion is</span>
+<span class="sd">        satisfied, or when then number of knots exceeds the maximum value:</span>
+<span class="sd">        the user-provided `nest` or `x.size + k + 1` --- which is the knot vector</span>
+<span class="sd">        for the interpolating spline.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    Generate some noisy data and fit a sequence of LSQ splines:</span>
+
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">    &gt;&gt;&gt; from scipy.interpolate import make_lsq_spline, generate_knots</span>
+<span class="sd">    &gt;&gt;&gt; rng = np.random.default_rng(12345)</span>
+<span class="sd">    &gt;&gt;&gt; x = np.linspace(-3, 3, 50)</span>
+<span class="sd">    &gt;&gt;&gt; y = np.exp(-x**2) + 0.1 * rng.standard_normal(size=50)</span>
+
+<span class="sd">    &gt;&gt;&gt; knots = list(generate_knots(x, y, s=1e-10))</span>
+<span class="sd">    &gt;&gt;&gt; for t in knots[::3]:</span>
+<span class="sd">    ...     spl = make_lsq_spline(x, y, t)</span>
+<span class="sd">    ...     xs = xs = np.linspace(-3, 3, 201)</span>
+<span class="sd">    ...     plt.plot(xs, spl(xs), &#39;-&#39;, label=f&#39;n = {len(t)}&#39;, lw=3, alpha=0.7)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(x, y, &#39;o&#39;, label=&#39;data&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(xs, np.exp(-xs**2), &#39;--&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.legend()</span>
+
+<span class="sd">    Note that increasing the number of knots make the result follow the data</span>
+<span class="sd">    more and more closely.</span>
+
+<span class="sd">    Also note that a step of the generator may add multiple knots:</span>
+
+<span class="sd">    &gt;&gt;&gt; [len(t) for t in knots]</span>
+<span class="sd">    [8, 9, 10, 12, 16, 24, 40, 48, 52, 54]</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The routine generates successive knots vectors of increasing length, starting</span>
+<span class="sd">    from ``2*(k+1)`` to ``len(x) + k + 1``, trying to make knots more dense</span>
+<span class="sd">    in the regions where the deviation of the LSQ spline from data is large.</span>
+
+<span class="sd">    When the maximum number of knots, ``len(x) + k + 1`` is reached</span>
+<span class="sd">    (this happens when ``s`` is small and ``nest`` is large), the generator</span>
+<span class="sd">    stops, and the last output is the knots for the interpolation with the</span>
+<span class="sd">    not-a-knot boundary condition.</span>
+
+<span class="sd">    Knots are located at data sites, unless ``k`` is even and the number of knots</span>
+<span class="sd">    is ``len(x) + k + 1``. In that case, the last output of the generator</span>
+<span class="sd">    has internal knots at Greville sites, ``(x[1:] + x[:-1]) / 2``.</span>
+
+<span class="sd">    .. versionadded:: 1.15.0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;s == 0 is interpolation only&quot;</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">_not_a_knot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">t</span>
+        <span class="k">return</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span> <span class="o">=</span> <span class="n">_validate_inputs</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="n">parametric</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+    <span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">_generate_knots_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="n">xe</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="n">nest</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_generate_knots_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">TOL</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>    <span class="c1"># the number of data points</span>
+
+    <span class="k">if</span> <span class="n">nest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># the max number of knots. This is set in _fitpack_impl.py line 274</span>
+        <span class="c1"># and fitpack.pyf line 198</span>
+        <span class="n">nest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nest</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`nest` too small: </span><span class="si">{</span><span class="n">nest</span><span class="w"> </span><span class="si">= }</span><span class="s2"> &lt; 2*(k+1) = </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="n">nmin</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>    <span class="c1"># the number of knots for an LSQ polynomial approximation</span>
+    <span class="n">nmax</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># the number of knots for the spline interpolation</span>
+
+    <span class="c1"># start from no internal knots</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="n">xb</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">xe</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">fpold</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+    <span class="c1"># c  main loop for the different sets of knots. m is a safe upper bound</span>
+    <span class="c1"># c  for the number of trials.</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">t</span>
+
+        <span class="c1"># construct the LSQ spline with this set of knots</span>
+        <span class="n">fpold</span> <span class="o">=</span> <span class="n">fp</span>
+        <span class="n">residuals</span> <span class="o">=</span> <span class="n">_get_residuals</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="n">fpms</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">s</span>
+
+        <span class="c1"># c  test whether the approximation sinf(x) is an acceptable solution.</span>
+        <span class="c1"># c  if f(p=inf) &lt; s accept the choice of knots.</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">fpms</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">acc</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">fpms</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1"># ### c  increase the number of knots. ###</span>
+
+        <span class="c1"># c  determine the number of knots nplus we are going to add.</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="n">nmin</span><span class="p">:</span>
+            <span class="c1"># the first iteration</span>
+            <span class="n">nplus</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">delta</span> <span class="o">=</span> <span class="n">fpold</span> <span class="o">-</span> <span class="n">fp</span>
+            <span class="n">npl1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">nplus</span> <span class="o">*</span> <span class="n">fpms</span> <span class="o">/</span> <span class="n">delta</span><span class="p">)</span> <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="n">acc</span> <span class="k">else</span> <span class="n">nplus</span><span class="o">*</span><span class="mi">2</span>
+            <span class="n">nplus</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">nplus</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">npl1</span><span class="p">,</span> <span class="n">nplus</span><span class="o">//</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+        <span class="c1"># actually add knots</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nplus</span><span class="p">):</span>
+            <span class="n">t</span> <span class="o">=</span> <span class="n">add_knot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">residuals</span><span class="p">)</span>
+
+            <span class="c1"># check if we have enough knots already</span>
+
+            <span class="n">n</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># c  if n = nmax, sinf(x) is an interpolating spline.</span>
+            <span class="c1"># c  if n=nmax we locate the knots as for interpolation.</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="n">nmax</span><span class="p">:</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">_not_a_knot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                <span class="k">yield</span> <span class="n">t</span>
+                <span class="k">return</span>
+
+            <span class="c1"># c  if n=nest we cannot increase the number of knots because of</span>
+            <span class="c1"># c  the storage capacity limitation.</span>
+            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="n">nest</span><span class="p">:</span>
+                <span class="k">yield</span> <span class="n">t</span>
+                <span class="k">return</span>
+
+            <span class="c1"># recompute if needed</span>
+            <span class="k">if</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nplus</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">residuals</span> <span class="o">=</span> <span class="n">_get_residuals</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+
+    <span class="c1"># this should never be reached</span>
+    <span class="k">return</span>
+
+
+<span class="c1">#   cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</span>
+<span class="c1">#   c  part 2: determination of the smoothing spline sp(x).                c</span>
+<span class="c1">#   c  ***************************************************                 c</span>
+<span class="c1">#   c  we have determined the number of knots and their position.          c</span>
+<span class="c1">#   c  we now compute the b-spline coefficients of the smoothing spline    c</span>
+<span class="c1">#   c  sp(x). the observation matrix a is extended by the rows of matrix   c</span>
+<span class="c1">#   c  b expressing that the kth derivative discontinuities of sp(x) at    c</span>
+<span class="c1">#   c  the interior knots t(k+2),...t(n-k-1) must be zero. the corres-     c</span>
+<span class="c1">#   c  ponding weights of these additional rows are set to 1/p.            c</span>
+<span class="c1">#   c  iteratively we then have to determine the value of p such that      c</span>
+<span class="c1">#   c  f(p)=sum((w(i)*(y(i)-sp(x(i))))**2) be = s. we already know that    c</span>
+<span class="c1">#   c  the least-squares kth degree polynomial corresponds to p=0, and     c</span>
+<span class="c1">#   c  that the least-squares spline corresponds to p=infinity. the        c</span>
+<span class="c1">#   c  iteration process which is proposed here, makes use of rational     c</span>
+<span class="c1">#   c  interpolation. since f(p) is a convex and strictly decreasing       c</span>
+<span class="c1">#   c  function of p, it can be approximated by a rational function        c</span>
+<span class="c1">#   c  r(p) = (u*p+v)/(p+w). three values of p(p1,p2,p3) with correspond-  c</span>
+<span class="c1">#   c  ing values of f(p) (f1=f(p1)-s,f2=f(p2)-s,f3=f(p3)-s) are used      c</span>
+<span class="c1">#   c  to calculate the new value of p such that r(p)=s. convergence is    c</span>
+<span class="c1">#   c  guaranteed by taking f1&gt;0 and f3&lt;0.                                 c</span>
+<span class="c1">#   cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">prodd</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">s</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">*=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">s</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">disc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Discontinuity matrix: jumps of k-th derivatives of b-splines at internal knots.</span>
+
+<span class="sd">    See Eqs. (9)-(10) of Ref. [1], or, equivalently, Eq. (3.43) of Ref. [2].</span>
+
+<span class="sd">    This routine assumes internal knots are all simple (have multiplicity =1).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    t : ndarray, 1D, shape(n,)</span>
+<span class="sd">        Knots.</span>
+<span class="sd">    k : int</span>
+<span class="sd">        The spline degree</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    disc : ndarray, shape(n-2*k-1, k+2)</span>
+<span class="sd">        The jumps of the k-th derivatives of b-splines at internal knots,</span>
+<span class="sd">        ``t[k+1], ...., t[n-k-1]``.</span>
+<span class="sd">    offset : ndarray, shape(2-2*k-1,)</span>
+<span class="sd">        Offsets</span>
+<span class="sd">    nc : int</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+
+<span class="sd">    The normalization here follows FITPACK:</span>
+<span class="sd">    (https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpdisc.f#L36)</span>
+
+<span class="sd">    The k-th derivative jumps are multiplied by a factor::</span>
+
+<span class="sd">        (delta / nrint)**k / k!</span>
+
+<span class="sd">    where ``delta`` is the length of the interval spanned by internal knots, and</span>
+<span class="sd">    ``nrint`` is one less the number of internal knots (i.e., the number of</span>
+<span class="sd">    subintervals between them).</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Paul Dierckx, Algorithms for smoothing data with periodic and parametric</span>
+<span class="sd">           splines, Computer Graphics and Image Processing, vol. 20, p. 171 (1982).</span>
+<span class="sd">           :doi:`10.1016/0146-664X(82)90043-0`</span>
+
+<span class="sd">    .. [2] Tom Lyche and Knut Morken, Spline methods,</span>
+<span class="sd">        http://www.uio.no/studier/emner/matnat/ifi/INF-MAT5340/v05/undervisningsmateriale/</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># the length of the base interval spanned by internal knots &amp; the number</span>
+    <span class="c1"># of subintervas between these internal knots</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">n</span> <span class="o">-</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">nrint</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="n">matr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">nrint</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrint</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">jj</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">2</span><span class="p">):</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">jj</span> <span class="o">+</span> <span class="n">ii</span>
+            <span class="n">matr</span><span class="p">[</span><span class="n">jj</span><span class="p">,</span> <span class="n">ii</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">/</span> <span class="n">prodd</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+        <span class="c1"># NB: equivalent to</span>
+        <span class="c1"># row = [(t[i + k + 1] - t[i]) / prodd(t, i, j, k) for i in range(j-k-1, j+1)]</span>
+        <span class="c1"># assert (matr[j-k-1, :] == row).all()</span>
+
+    <span class="c1"># follow FITPACK</span>
+    <span class="n">matr</span> <span class="o">*=</span> <span class="p">(</span><span class="n">delta</span><span class="o">/</span> <span class="n">nrint</span><span class="p">)</span><span class="o">**</span><span class="n">k</span>
+
+    <span class="c1"># make it packed</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrint</span><span class="o">-</span><span class="mi">1</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+    <span class="n">nc</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">matr</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">nc</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">F</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; The r.h.s. of ``f(p) = s``.</span>
+
+<span class="sd">    Given scalar `p`, we solve the system of equations in the LSQ sense:</span>
+
+<span class="sd">        | A     |  @ | c | = | y |</span>
+<span class="sd">        | B / p |    | 0 |   | 0 |</span>
+
+<span class="sd">    where `A` is the matrix of b-splines and `b` is the discontinuity matrix</span>
+<span class="sd">    (the jumps of the k-th derivatives of b-spline basis elements at knots).</span>
+
+<span class="sd">    Since we do that repeatedly while minimizing over `p`, we QR-factorize</span>
+<span class="sd">    `A` only once and update the QR factorization only of the `B` rows of the</span>
+<span class="sd">    augmented matrix |A, B/p|.</span>
+
+<span class="sd">    The system of equations is Eq. (15) Ref. [1]_, the strategy and implementation</span>
+<span class="sd">    follows that of FITPACK, see specific links below.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    [1] P. Dierckx, Algorithms for Smoothing Data with Periodic and Parametric Splines,</span>
+<span class="sd">        COMPUTER GRAPHICS AND IMAGE PROCESSING vol. 20, pp 171-184 (1982.)</span>
+<span class="sd">        https://doi.org/10.1016/0146-664X(82)90043-0</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">t</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">k</span> <span class="o">=</span> <span class="n">k</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">w</span>
+        <span class="k">if</span> <span class="n">w</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">w</span><span class="o">.</span><span class="n">ndim</span><span class="w"> </span><span class="si">= }</span><span class="s2"> != 1.&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="n">w</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
+
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F: expected y.ndim == 2, got </span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="w"> </span><span class="si">= }</span><span class="s2"> instead.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># ### precompute what we can ###</span>
+
+        <span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L250</span>
+        <span class="c1"># c  evaluate the discontinuity jump of the kth derivative of the</span>
+        <span class="c1"># c  b-splines at the knots t(l),l=k+2,...n-k-1 and store in b.</span>
+        <span class="n">b</span><span class="p">,</span> <span class="n">b_offset</span><span class="p">,</span> <span class="n">b_nc</span> <span class="o">=</span> <span class="n">disc</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+        <span class="c1"># the QR factorization of the data matrix, if not provided</span>
+        <span class="c1"># NB: otherwise, must be consistent with x,y &amp; s, but this is not checked</span>
+        <span class="k">if</span> <span class="n">R</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Y</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">R</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_lsq_solve_qr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+
+        <span class="c1"># prepare to combine R and the discontinuity matrix (AB); also r.h.s. (YY)</span>
+        <span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L269</span>
+        <span class="c1"># c  the rows of matrix b with weight 1/p are rotated into the</span>
+        <span class="c1"># c  triangularised observation matrix a which is stored in g.</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">k</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">nz</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">R</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">nz</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Internal error: </span><span class="si">{</span><span class="n">R</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="si">=}</span><span class="s2"> != </span><span class="si">{</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="si">=}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># r.h.s. of the augmented system</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">YY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">Y</span><span class="p">[:</span><span class="n">nc</span><span class="p">],</span> <span class="n">z</span><span class="p">]</span>
+
+        <span class="c1"># l.h.s. of the augmented system</span>
+        <span class="n">AA</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nc</span> <span class="o">+</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="o">+</span><span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">AA</span><span class="p">[:</span><span class="n">nc</span><span class="p">,</span> <span class="p">:</span><span class="n">nz</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[:</span><span class="n">nc</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="c1"># AA[nc:, :] = b.a / p  # done in __call__(self, p)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">AA</span>  <span class="o">=</span> <span class="n">AA</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nc</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">),</span> <span class="n">b_offset</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nc</span> <span class="o">=</span> <span class="n">nc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L279</span>
+        <span class="c1"># c  the row of matrix b is rotated into triangle by givens transformation</span>
+
+        <span class="c1"># copy the precomputed matrices over for in-place work</span>
+        <span class="c1"># R = PackedMatrix(self.AB.a.copy(), self.AB.offset.copy(), nc)</span>
+        <span class="n">AB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AA</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">nc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nc</span>
+
+        <span class="n">AB</span><span class="p">[</span><span class="n">nc</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">/</span> <span class="n">p</span>
+        <span class="n">QY</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">YY</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="c1"># heavy lifting happens here, in-place</span>
+        <span class="n">_dierckx</span><span class="o">.</span><span class="n">qr_reduce</span><span class="p">(</span><span class="n">AB</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">QY</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="n">nc</span><span class="p">)</span>
+
+        <span class="c1"># solve for the coefficients</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">_dierckx</span><span class="o">.</span><span class="n">fpback</span><span class="p">(</span><span class="n">AB</span><span class="p">,</span> <span class="n">nc</span><span class="p">,</span> <span class="n">QY</span><span class="p">)</span>
+
+        <span class="n">spl</span> <span class="o">=</span> <span class="n">BSpline</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">residuals</span> <span class="o">=</span> <span class="n">_compute_residuals</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">w</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">spl</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">spl</span> <span class="o">=</span> <span class="n">spl</span>   <span class="c1"># store it</span>
+
+        <span class="k">return</span> <span class="n">fp</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fprati</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">f3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The root of r(p) = (u*p + v) / (p + w) given three points and values,</span>
+<span class="sd">    (p1, f2), (p2, f2) and (p3, f3).</span>
+
+<span class="sd">    The FITPACK analog adjusts the bounds, and we do not</span>
+<span class="sd">    https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fprati.f</span>
+
+<span class="sd">    NB: FITPACK uses p &lt; 0 to encode p=infinity. We just use the infinity itself.</span>
+<span class="sd">    Since the bracket is ``p1 &lt;= p2 &lt;= p3``, ``p3`` can be infinite (in fact,</span>
+<span class="sd">    this is what the minimizer starts with, ``p3=inf``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">*</span> <span class="p">(</span><span class="n">f2</span> <span class="o">-</span> <span class="n">f3</span><span class="p">)</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">f2</span> <span class="o">*</span> <span class="p">(</span><span class="n">f3</span> <span class="o">-</span> <span class="n">f1</span><span class="p">)</span>
+    <span class="n">h3</span> <span class="o">=</span> <span class="n">f3</span> <span class="o">*</span> <span class="p">(</span><span class="n">f1</span> <span class="o">-</span> <span class="n">f2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">p3</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">p2</span><span class="o">*</span><span class="n">h1</span> <span class="o">+</span> <span class="n">p1</span><span class="o">*</span><span class="n">h2</span><span class="p">)</span> <span class="o">/</span> <span class="n">h3</span>
+    <span class="k">return</span> <span class="o">-</span><span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="n">p2</span><span class="o">*</span><span class="n">h3</span> <span class="o">+</span> <span class="n">p2</span><span class="o">*</span><span class="n">p3</span><span class="o">*</span><span class="n">h1</span> <span class="o">+</span> <span class="n">p1</span><span class="o">*</span><span class="n">p3</span><span class="o">*</span><span class="n">h2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">p1</span><span class="o">*</span><span class="n">h1</span> <span class="o">+</span> <span class="n">p2</span><span class="o">*</span><span class="n">h2</span> <span class="o">+</span> <span class="n">p3</span><span class="o">*</span><span class="n">h3</span><span class="p">)</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Bunch</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+<span class="n">_iermesg</span> <span class="o">=</span> <span class="p">{</span>
+<span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;error. a theoretically impossible result was found during</span>
+<span class="s2">the iteration process for finding a smoothing spline with</span>
+<span class="s2">fp = s. probably causes : s too small.</span>
+<span class="s2">there is an approximation returned but the corresponding</span>
+<span class="s2">weighted sum of squared residuals does not satisfy the</span>
+<span class="s2">condition abs(fp-s)/s &lt; tol.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">,</span>
+<span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;&quot;&quot;error. the maximal number of iterations maxit (set to 20</span>
+<span class="s2">by the program) allowed for finding a smoothing spline</span>
+<span class="s2">with fp=s has been reached. probably causes : s too small</span>
+<span class="s2">there is an approximation returned but the corresponding</span>
+<span class="s2">weighted sum of squared residuals does not satisfy the</span>
+<span class="s2">condition abs(fp-s)/s &lt; tol.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">root_rati</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p0</span><span class="p">,</span> <span class="n">bracket</span><span class="p">,</span> <span class="n">acc</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Solve `f(p) = 0` using a rational function approximation.</span>
+
+<span class="sd">    In a nutshell, since the function f(p) is known to be monotonically decreasing, we</span>
+<span class="sd">       - maintain the bracket (p1, f1), (p2, f2) and (p3, f3)</span>
+<span class="sd">       - at each iteration step, approximate f(p) by a rational function</span>
+<span class="sd">         r(p) = (u*p + v) / (p + w)</span>
+<span class="sd">         and make a step to p_new to the root of f(p): r(p_new) = 0.</span>
+<span class="sd">         The coefficients u, v and w are found from the bracket values p1..3 and f1...3</span>
+
+<span class="sd">    The algorithm and implementation follows</span>
+<span class="sd">    https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L229</span>
+<span class="sd">    and</span>
+<span class="sd">    https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fppara.f#L290</span>
+
+<span class="sd">    Note that the latter is for parametric splines and the former is for 1D spline</span>
+<span class="sd">    functions. The minimization is indentical though [modulo a summation over the</span>
+<span class="sd">    dimensions in the computation of f(p)], so we reuse the minimizer for both</span>
+<span class="sd">    d=1 and d&gt;1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Magic values from</span>
+    <span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L27</span>
+    <span class="n">con1</span> <span class="o">=</span> <span class="mf">0.1</span>
+    <span class="n">con9</span> <span class="o">=</span> <span class="mf">0.9</span>
+    <span class="n">con4</span> <span class="o">=</span> <span class="mf">0.04</span>
+
+    <span class="c1"># bracketing flags (follow FITPACK)</span>
+    <span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fppara.f#L365</span>
+    <span class="n">ich1</span><span class="p">,</span> <span class="n">ich3</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+    <span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">f1</span><span class="p">),</span> <span class="p">(</span><span class="n">p3</span><span class="p">,</span> <span class="n">f3</span><span class="p">)</span>  <span class="o">=</span> <span class="n">bracket</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">p0</span>
+
+    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">MAXIT</span><span class="p">):</span>
+        <span class="n">p2</span><span class="p">,</span> <span class="n">f2</span> <span class="o">=</span> <span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+        <span class="c1"># c  test whether the approximation sp(x) is an acceptable solution.</span>
+        <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">f2</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">acc</span><span class="p">:</span>
+            <span class="n">ier</span><span class="p">,</span> <span class="n">converged</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span>
+            <span class="k">break</span>
+
+        <span class="c1"># c  carry out one more step of the iteration process.</span>
+        <span class="k">if</span> <span class="n">ich3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f2</span> <span class="o">-</span> <span class="n">f3</span> <span class="o">&lt;=</span> <span class="n">acc</span><span class="p">:</span>
+                <span class="c1"># c  our initial choice of p is too large.</span>
+                <span class="n">p3</span> <span class="o">=</span> <span class="n">p2</span>
+                <span class="n">f3</span> <span class="o">=</span> <span class="n">f2</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">*</span><span class="n">con4</span>
+                <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">p1</span><span class="p">:</span>
+                     <span class="n">p</span> <span class="o">=</span> <span class="n">p1</span><span class="o">*</span><span class="n">con9</span> <span class="o">+</span> <span class="n">p2</span><span class="o">*</span><span class="n">con1</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">f2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ich3</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="k">if</span> <span class="n">ich1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">f1</span> <span class="o">-</span> <span class="n">f2</span> <span class="o">&lt;=</span> <span class="n">acc</span><span class="p">:</span>
+                <span class="c1"># c  our initial choice of p is too small</span>
+                <span class="n">p1</span> <span class="o">=</span> <span class="n">p2</span>
+                <span class="n">f1</span> <span class="o">=</span> <span class="n">f2</span>
+                <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">/</span><span class="n">con4</span>
+                <span class="k">if</span> <span class="n">p3</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span> <span class="ow">and</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">p3</span><span class="p">:</span>
+                     <span class="n">p</span> <span class="o">=</span> <span class="n">p2</span><span class="o">*</span><span class="n">con1</span> <span class="o">+</span> <span class="n">p3</span><span class="o">*</span><span class="n">con9</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">f2</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">ich1</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="c1"># c  test whether the iteration process proceeds as theoretically expected.</span>
+        <span class="c1"># [f(p) should be monotonically decreasing]</span>
+        <span class="k">if</span> <span class="n">f1</span> <span class="o">&lt;=</span> <span class="n">f2</span> <span class="ow">or</span> <span class="n">f2</span> <span class="o">&lt;=</span> <span class="n">f3</span><span class="p">:</span>
+            <span class="n">ier</span><span class="p">,</span> <span class="n">converged</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">False</span>
+            <span class="k">break</span>
+
+        <span class="c1"># actually make the iteration step</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">fprati</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">f2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">f3</span><span class="p">)</span>
+
+        <span class="c1"># c  adjust the value of p1,f1,p3 and f3 such that f1 &gt; 0 and f3 &lt; 0.</span>
+        <span class="k">if</span> <span class="n">f2</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">p3</span><span class="p">,</span> <span class="n">f3</span> <span class="o">=</span> <span class="n">p2</span><span class="p">,</span> <span class="n">f2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p1</span><span class="p">,</span> <span class="n">f1</span> <span class="o">=</span> <span class="n">p2</span><span class="p">,</span> <span class="n">f2</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># not converged in MAXIT iterations</span>
+        <span class="n">ier</span><span class="p">,</span> <span class="n">converged</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">False</span>
+
+    <span class="k">if</span> <span class="n">ier</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="ne">RuntimeWarning</span><span class="p">(</span><span class="n">_iermesg</span><span class="p">[</span><span class="n">ier</span><span class="p">]),</span> <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">Bunch</span><span class="p">(</span><span class="n">converged</span><span class="o">=</span><span class="n">converged</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">iterations</span><span class="o">=</span><span class="n">it</span><span class="p">,</span> <span class="n">ier</span><span class="o">=</span><span class="n">ier</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_make_splrep_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Shared infra for make_splrep and make_splprep.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">TOL</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span>    <span class="c1"># the number of data points</span>
+
+    <span class="k">if</span> <span class="n">nest</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># the max number of knots. This is set in _fitpack_impl.py line 274</span>
+        <span class="c1"># and fitpack.pyf line 198</span>
+        <span class="n">nest</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">k</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">nest</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;`nest` too small: </span><span class="si">{</span><span class="n">nest</span><span class="w"> </span><span class="si">= }</span><span class="s2"> &lt; 2*(k+1) = </span><span class="si">{</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>    
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Either supply `t` or `nest`.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">gen</span> <span class="o">=</span> <span class="n">_generate_knots_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="n">xe</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="n">nest</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">gen</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fpcheck</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># nothing to optimize</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">_lsq_solve_qr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">BSpline</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+
+    <span class="c1">### solve ###</span>
+
+    <span class="c1"># c  initial value for p.</span>
+    <span class="c1"># https://github.com/scipy/scipy/blob/maintenance/1.11.x/scipy/interpolate/fitpack/fpcurf.f#L253</span>
+    <span class="n">R</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_lsq_solve_qr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">nc</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span><span class="n">k</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">nc</span> <span class="o">/</span> <span class="n">R</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># ### bespoke solver ####</span>
+    <span class="c1"># initial conditions</span>
+    <span class="c1"># f(p=inf) : LSQ spline with knots t   (XXX: reuse R, c)</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">_get_residuals</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">fpinf</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">-</span> <span class="n">s</span>
+
+    <span class="c1"># f(p=0): LSQ spline without internal knots</span>
+    <span class="n">residuals</span> <span class="o">=</span> <span class="n">_get_residuals</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xb</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="n">xe</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span> <span class="n">k</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">fp0</span> <span class="o">=</span> <span class="n">residuals</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">fp0</span> <span class="o">=</span> <span class="n">fp0</span> <span class="o">-</span> <span class="n">s</span>
+
+    <span class="c1"># solve</span>
+    <span class="n">bracket</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">fp0</span><span class="p">),</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">fpinf</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">F</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">R</span><span class="o">=</span><span class="n">R</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">)</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="n">root_rati</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">bracket</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+
+    <span class="c1"># solve ALTERNATIVE: is roughly equivalent, gives slightly different results</span>
+    <span class="c1"># starting from scratch, that would have probably been tolerable;</span>
+    <span class="c1"># backwards compatibility dictates that we replicate the FITPACK minimizer though.</span>
+ <span class="c1">#   f = F(x, y, t, k=k, s=s, w=w, R=R, Y=Y)</span>
+ <span class="c1">#   from scipy.optimize import root_scalar</span>
+ <span class="c1">#   res_ = root_scalar(f, x0=p, rtol=acc)</span>
+ <span class="c1">#   assert res_.converged</span>
+
+    <span class="c1"># f.spl is the spline corresponding to the found `p` value</span>
+    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">spl</span>
+
+
+<div class="viewcode-block" id="make_splrep">
+<a class="viewcode-back" href="../../../skferm.smoothing.html#skferm.smoothing.spline.make_splrep">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_splrep</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Find the B-spline representation of a 1D function.</span>
+
+<span class="sd">    Given the set of data points ``(x[i], y[i])``, determine a smooth spline</span>
+<span class="sd">    approximation of degree ``k`` on the interval ``xb &lt;= x &lt;= xe``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x, y : array_like, shape (m,)</span>
+<span class="sd">        The data points defining a curve ``y = f(x)``.</span>
+<span class="sd">    w : array_like, shape (m,), optional</span>
+<span class="sd">        Strictly positive 1D array of weights, of the same length as `x` and `y`.</span>
+<span class="sd">        The weights are used in computing the weighted least-squares spline</span>
+<span class="sd">        fit. If the errors in the y values have standard-deviation given by the</span>
+<span class="sd">        vector ``d``, then `w` should be ``1/d``.</span>
+<span class="sd">        Default is ``np.ones(m)``.</span>
+<span class="sd">    xb, xe : float, optional</span>
+<span class="sd">        The interval to fit.  If None, these default to ``x[0]`` and ``x[-1]``,</span>
+<span class="sd">        respectively.</span>
+<span class="sd">    k : int, optional</span>
+<span class="sd">        The degree of the spline fit. It is recommended to use cubic splines,</span>
+<span class="sd">        ``k=3``, which is the default. Even values of `k` should be avoided,</span>
+<span class="sd">        especially with small `s` values.</span>
+<span class="sd">    s : float, optional</span>
+<span class="sd">        The smoothing condition. The amount of smoothness is determined by</span>
+<span class="sd">        satisfying the conditions::</span>
+
+<span class="sd">            sum((w * (g(x)  - y))**2 ) &lt;= s</span>
+
+<span class="sd">        where ``g(x)`` is the smoothed fit to ``(x, y)``. The user can use `s`</span>
+<span class="sd">        to control the tradeoff between closeness to data and smoothness of fit.</span>
+<span class="sd">        Larger `s` means more smoothing while smaller values of `s` indicate less</span>
+<span class="sd">        smoothing.</span>
+<span class="sd">        Recommended values of `s` depend on the weights, `w`. If the weights</span>
+<span class="sd">        represent the inverse of the standard deviation of `y`, then a good `s`</span>
+<span class="sd">        value should be found in the range ``(m-sqrt(2*m), m+sqrt(2*m))`` where</span>
+<span class="sd">        ``m`` is the number of datapoints in `x`, `y`, and `w`.</span>
+<span class="sd">        Default is ``s = 0.0``, i.e. interpolation.</span>
+<span class="sd">    t : array_like, optional</span>
+<span class="sd">        The spline knots. If None (default), the knots will be constructed</span>
+<span class="sd">        automatically.</span>
+<span class="sd">        There must be at least ``2*k + 2`` and at most ``m + k + 1`` knots.</span>
+<span class="sd">    nest : int, optional</span>
+<span class="sd">        The target length of the knot vector. Should be between ``2*(k + 1)``</span>
+<span class="sd">        (the minimum number of knots for a degree-``k`` spline), and</span>
+<span class="sd">        ``m + k + 1`` (the number of knots of the interpolating spline).</span>
+<span class="sd">        The actual number of knots returned by this routine may be slightly</span>
+<span class="sd">        larger than `nest`.</span>
+<span class="sd">        Default is None (no limit, add up to ``m + k + 1`` knots).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    spl : a `BSpline` instance</span>
+<span class="sd">        For `s=0`,  ``spl(x) == y``.</span>
+<span class="sd">        For non-zero values of `s` the `spl` represents the smoothed approximation</span>
+<span class="sd">        to `(x, y)`, generally with fewer knots.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    generate_knots : is used under the hood for generating the knots</span>
+<span class="sd">    make_splprep : the analog of this routine for parametric curves</span>
+<span class="sd">    make_interp_spline : construct an interpolating spline (``s = 0``)</span>
+<span class="sd">    make_lsq_spline : construct the least-squares spline given the knot vector</span>
+<span class="sd">    splrep : a FITPACK analog of this routine</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] P. Dierckx, &quot;Algorithms for smoothing data with periodic and</span>
+<span class="sd">        parametric splines, Computer Graphics and Image Processing&quot;,</span>
+<span class="sd">        20 (1982) 171-184.</span>
+<span class="sd">    .. [2] P. Dierckx, &quot;Curve and surface fitting with splines&quot;, Monographs on</span>
+<span class="sd">        Numerical Analysis, Oxford University Press, 1993.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This routine constructs the smoothing spline function, :math:`g(x)`, to</span>
+<span class="sd">    minimize the sum of jumps, :math:`D_j`, of the ``k``-th derivative at the</span>
+<span class="sd">    internal knots (:math:`x_b &lt; t_i &lt; x_e`), where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        D_i = g^{(k)}(t_i + 0) - g^{(k)}(t_i - 0)</span>
+
+<span class="sd">    Specifically, the routine constructs the spline function :math:`g(x)` which</span>
+<span class="sd">    minimizes</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">            \sum_i | D_i |^2 \to \mathrm{min}</span>
+
+<span class="sd">    provided that</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">           \sum_{j=1}^m (w_j \times (g(x_j) - y_j))^2 \leqslant s ,</span>
+
+<span class="sd">    where :math:`s &gt; 0` is the input parameter.</span>
+
+<span class="sd">    In other words, we balance maximizing the smoothness (measured as the jumps</span>
+<span class="sd">    of the derivative, the first criterion), and the deviation of :math:`g(x_j)`</span>
+<span class="sd">    from the data :math:`y_j` (the second criterion).</span>
+
+<span class="sd">    Note that the summation in the second criterion is over all data points,</span>
+<span class="sd">    and in the first criterion it is over the internal spline knots (i.e.</span>
+<span class="sd">    those with ``xb &lt; t[i] &lt; xe``). The spline knots are in general a subset</span>
+<span class="sd">    of data, see `generate_knots` for details.</span>
+
+<span class="sd">    Also note the difference of this routine to `make_lsq_spline`: the latter</span>
+<span class="sd">    routine does not consider smoothness and simply solves a least-squares</span>
+<span class="sd">    problem</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \sum w_j \times (g(x_j) - y_j)^2 \to \mathrm{min}</span>
+
+<span class="sd">    for a spline function :math:`g(x)` with a _fixed_ knot vector ``t``.</span>
+
+<span class="sd">    .. versionadded:: 1.15.0</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">nest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;s==0 is for interpolation only&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">make_interp_spline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
+
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span> <span class="o">=</span> <span class="n">_validate_inputs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="p">,</span> <span class="n">parametric</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">spl</span> <span class="o">=</span> <span class="n">_make_splrep_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="n">xb</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="n">xe</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="n">nest</span><span class="p">)</span>
+
+    <span class="c1"># postprocess: squeeze out the last dimension: was added to simplify the internals.</span>
+    <span class="n">spl</span><span class="o">.</span><span class="n">c</span> <span class="o">=</span> <span class="n">spl</span><span class="o">.</span><span class="n">c</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">spl</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_splprep</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ub</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ue</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find a smoothed B-spline representation of a parametric N-D curve.</span>
+
+<span class="sd">    Given a list of N 1D arrays, `x`, which represent a curve in</span>
+<span class="sd">    N-dimensional space parametrized by `u`, find a smooth approximating</span>
+<span class="sd">    spline curve ``g(u)``.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : array_like, shape (m, ndim)</span>
+<span class="sd">        Sampled data points representing the curve in ``ndim`` dimensions.</span>
+<span class="sd">        The typical use is a list of 1D arrays, each of length ``m``.</span>
+<span class="sd">    w : array_like, shape(m,), optional</span>
+<span class="sd">        Strictly positive 1D array of weights.</span>
+<span class="sd">        The weights are used in computing the weighted least-squares spline</span>
+<span class="sd">        fit. If the errors in the `x` values have standard deviation given by</span>
+<span class="sd">        the vector d, then `w` should be 1/d. Default is ``np.ones(m)``.</span>
+<span class="sd">    u : array_like, optional</span>
+<span class="sd">        An array of parameter values for the curve in the parametric form.</span>
+<span class="sd">        If not given, these values are calculated automatically, according to::</span>
+
+<span class="sd">            v[0] = 0</span>
+<span class="sd">            v[i] = v[i-1] + distance(x[i], x[i-1])</span>
+<span class="sd">            u[i] = v[i] / v[-1]</span>
+
+<span class="sd">    ub, ue : float, optional</span>
+<span class="sd">        The end-points of the parameters interval. Default to ``u[0]`` and ``u[-1]``.</span>
+<span class="sd">    k : int, optional</span>
+<span class="sd">        Degree of the spline. Cubic splines, ``k=3``, are recommended.</span>
+<span class="sd">        Even values of `k` should be avoided especially with a small ``s`` value.</span>
+<span class="sd">        Default is ``k=3``</span>
+<span class="sd">    s : float, optional</span>
+<span class="sd">        A smoothing condition.  The amount of smoothness is determined by</span>
+<span class="sd">        satisfying the conditions::</span>
+
+<span class="sd">            sum((w * (g(u) - x))**2) &lt;= s,</span>
+
+<span class="sd">        where ``g(u)`` is the smoothed approximation to ``x``.  The user can</span>
+<span class="sd">        use `s` to control the trade-off between closeness and smoothness</span>
+<span class="sd">        of fit.  Larger ``s`` means more smoothing while smaller values of ``s``</span>
+<span class="sd">        indicate less smoothing.</span>
+<span class="sd">        Recommended values of ``s`` depend on the weights, ``w``.  If the weights</span>
+<span class="sd">        represent the inverse of the standard deviation of ``x``, then a good</span>
+<span class="sd">        ``s`` value should be found in the range ``(m - sqrt(2*m), m + sqrt(2*m))``,</span>
+<span class="sd">        where ``m`` is the number of data points in ``x`` and ``w``.</span>
+<span class="sd">    t : array_like, optional</span>
+<span class="sd">        The spline knots. If None (default), the knots will be constructed</span>
+<span class="sd">        automatically.</span>
+<span class="sd">        There must be at least ``2*k + 2`` and at most ``m + k + 1`` knots.</span>
+<span class="sd">    nest : int, optional</span>
+<span class="sd">        The target length of the knot vector. Should be between ``2*(k + 1)``</span>
+<span class="sd">        (the minimum number of knots for a degree-``k`` spline), and</span>
+<span class="sd">        ``m + k + 1`` (the number of knots of the interpolating spline).</span>
+<span class="sd">        The actual number of knots returned by this routine may be slightly</span>
+<span class="sd">        larger than `nest`.</span>
+<span class="sd">        Default is None (no limit, add up to ``m + k + 1`` knots).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    spl : a `BSpline` instance</span>
+<span class="sd">        For `s=0`,  ``spl(u) == x``.</span>
+<span class="sd">        For non-zero values of ``s``, `spl` represents the smoothed approximation</span>
+<span class="sd">        to ``x``, generally with fewer knots.</span>
+<span class="sd">    u : ndarray</span>
+<span class="sd">        The values of the parameters</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    generate_knots : is used under the hood for generating the knots</span>
+<span class="sd">    make_splrep : the analog of this routine 1D functions</span>
+<span class="sd">    make_interp_spline : construct an interpolating spline (``s = 0``)</span>
+<span class="sd">    make_lsq_spline : construct the least-squares spline given the knot vector</span>
+<span class="sd">    splprep : a FITPACK analog of this routine</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Given a set of :math:`m` data points in :math:`D` dimensions, :math:`\vec{x}_j`,</span>
+<span class="sd">    with :math:`j=1, ..., m` and :math:`\vec{x}_j = (x_{j; 1}, ..., x_{j; D})`,</span>
+<span class="sd">    this routine constructs the parametric spline curve :math:`g_a(u)` with</span>
+<span class="sd">    :math:`a=1, ..., D`, to minimize the sum of jumps, :math:`D_{i; a}`, of the</span>
+<span class="sd">    ``k``-th derivative at the internal knots (:math:`u_b &lt; t_i &lt; u_e`), where</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        D_{i; a} = g_a^{(k)}(t_i + 0) - g_a^{(k)}(t_i - 0)</span>
+
+<span class="sd">    Specifically, the routine constructs the spline function :math:`g(u)` which</span>
+<span class="sd">    minimizes</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">            \sum_i \sum_{a=1}^D | D_{i; a} |^2 \to \mathrm{min}</span>
+
+<span class="sd">    provided that</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \sum_{j=1}^m \sum_{a=1}^D (w_j \times (g_a(u_j) - x_{j; a}))^2 \leqslant s</span>
+
+<span class="sd">    where :math:`u_j` is the value of the parameter corresponding to the data point</span>
+<span class="sd">    :math:`(x_{j; 1}, ..., x_{j; D})`, and :math:`s &gt; 0` is the input parameter.</span>
+
+<span class="sd">    In other words, we balance maximizing the smoothness (measured as the jumps</span>
+<span class="sd">    of the derivative, the first criterion), and the deviation of :math:`g(u_j)`</span>
+<span class="sd">    from the data :math:`x_j` (the second criterion).</span>
+
+<span class="sd">    Note that the summation in the second criterion is over all data points,</span>
+<span class="sd">    and in the first criterion it is over the internal spline knots (i.e.</span>
+<span class="sd">    those with ``ub &lt; t[i] &lt; ue``). The spline knots are in general a subset</span>
+<span class="sd">    of data, see `generate_knots` for details.</span>
+
+<span class="sd">    .. versionadded:: 1.15.0</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] P. Dierckx, &quot;Algorithms for smoothing data with periodic and</span>
+<span class="sd">        parametric splines, Computer Graphics and Image Processing&quot;,</span>
+<span class="sd">        20 (1982) 171-184.</span>
+<span class="sd">    .. [2] P. Dierckx, &quot;Curve and surface fitting with splines&quot;, Monographs on</span>
+<span class="sd">        Numerical Analysis, Oxford University Press, 1993.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># construct the default parametrization of the curve</span>
+    <span class="k">if</span> <span class="n">u</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">dp</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span> <span class="o">/</span> <span class="n">u</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">nest</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;s==0 is for interpolation only&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">make_interp_spline</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">u</span>
+
+    <span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="n">ue</span> <span class="o">=</span> <span class="n">_validate_inputs</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">ub</span><span class="p">,</span> <span class="n">ue</span><span class="p">,</span> <span class="n">parametric</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">spl</span> <span class="o">=</span> <span class="n">_make_splrep_impl</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">w</span><span class="p">,</span> <span class="n">xb</span><span class="o">=</span><span class="n">ub</span><span class="p">,</span> <span class="n">xe</span><span class="o">=</span><span class="n">ue</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">nest</span><span class="o">=</span><span class="n">nest</span><span class="p">)</span>
+
+    <span class="c1"># posprocess: `axis=1` so that spl(u).shape == np.shape(x)</span>
+    <span class="c1"># when `x` is a list of 1D arrays (cf original splPrep)</span>
+    <span class="n">cc</span> <span class="o">=</span> <span class="n">spl</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">spl1</span> <span class="o">=</span> <span class="n">BSpline</span><span class="p">(</span><span class="n">spl</span><span class="o">.</span><span class="n">t</span><span class="p">,</span> <span class="n">cc</span><span class="p">,</span> <span class="n">spl</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">spl1</span><span class="p">,</span> <span class="n">u</span>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Aschwin Schilperoort.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
