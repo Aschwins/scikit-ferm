@@ -12,17 +12,6 @@ Subpackages
    skferm.growth_models
    skferm.smoothing
 
-Submodules
-----------
-
-skferm.hello module
--------------------
-
-.. automodule:: skferm.hello
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Module contents
 ---------------
 

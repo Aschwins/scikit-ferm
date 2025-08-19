@@ -105,5 +105,5 @@ For testing and experimentation, you can generate synthetic growth data using va
        A=10,             # upper asymptote
        L=200,            # lag phase duration
        mu=0.05,          # maximum specific growth rate
-       noise_std=.09    # add some realistic noise
+       noise_std=.09     # add some realistic noise
    )
