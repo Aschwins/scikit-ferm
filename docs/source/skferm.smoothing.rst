@@ -4,34 +4,18 @@ skferm.smoothing package
 Submodules
 ----------
 
-skferm.smoothing.moving\_average module
----------------------------------------
-
-.. automodule:: skferm.smoothing.moving_average
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-skferm.smoothing.pipe module
+skferm.smoothing.core module
 ----------------------------
 
-.. automodule:: skferm.smoothing.pipe
+.. automodule:: skferm.smoothing.core
    :members:
    :undoc-members:
    :show-inheritance:
 
-skferm.smoothing.savgol\_filter module
---------------------------------------
+skferm.smoothing.methods module
+-------------------------------
 
-.. automodule:: skferm.smoothing.savgol_filter
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-skferm.smoothing.spline module
-------------------------------
-
-.. automodule:: skferm.smoothing.spline
+.. automodule:: skferm.smoothing.methods
    :members:
    :undoc-members:
    :show-inheritance:

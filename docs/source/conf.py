@@ -22,7 +22,8 @@ extensions = ["sphinx.ext.duration",
               "sphinx.ext.viewcode",
               "sphinx.ext.napoleon",
               "sphinx.ext.intersphinx",
-              "sphinx.ext.autosummary"
+              "sphinx.ext.autosummary",
+              "sphinx_design"
               ]
 
 templates_path = ["_templates"]
@@ -34,6 +35,10 @@ exclude_patterns = []
 
 html_theme = "pydata_sphinx_theme"
 html_static_path = ["_static"]
+html_favicon = "_static/favicon.ico"
+html_css_files = [
+    "custom.css",
+]
 
 html_theme_options = {
     "github_url": "https://github.com/aschwins/scikit-ferm",
