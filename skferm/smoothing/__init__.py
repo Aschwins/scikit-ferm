@@ -21,7 +21,7 @@ def smooth(
     groupby_col: Optional[str] = None,
     **kwargs,
 ) -> pd.DataFrame:
-    """
+    r"""
     Apply smoothing to data with pandas pipe support.
 
     Parameters:
@@ -30,7 +30,7 @@ def smooth(
     - y: Column name for y-axis values
     - method: Smoothing method
     - groupby_col: Optional column to group by
-    - **kwargs: Method-specific parameters
+    - \*\*kwargs: Method-specific parameters
 
     Returns:
     - DataFrame with smoothed values in {y}_smooth column

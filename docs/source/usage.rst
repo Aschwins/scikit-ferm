@@ -19,4 +19,5 @@ Use Cases
    :maxdepth: 2
 
    use-case-datasets
-   use-case-growth-modelling
+   use-case-curve-smoothing
+   use-case-interpolation
