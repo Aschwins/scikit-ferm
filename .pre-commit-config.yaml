@@ -8,6 +8,8 @@ repos:
     -   id: check-docstring-first
     -   id: check-merge-conflict
     -   id: check-added-large-files
+        args: ['--maxkb=1024']
+
 -   repo: https://github.com/RobertCraigie/pyright-python
     rev: v1.1.393
     hooks:
