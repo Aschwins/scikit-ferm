@@ -56,6 +56,7 @@ extend-select = ["I", "T201"]
 ignore = [
     "E731",  # do not assign a `lambda` expression, use a `def`
     ]
+per-file-ignores = { "*.ipynb" = ["T201"] }
 
 [build-system]
 requires = ["hatchling"]
