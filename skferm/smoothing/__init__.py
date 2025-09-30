@@ -1,4 +1,4 @@
-from typing import Literal, Optional
+from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import pandas as pd
 
@@ -17,7 +17,7 @@ def smooth(
     df: pd.DataFrame,
     x: str,
     y: str,
-    method: Literal["rolling", "ema", "savgol", "lowess"] = "rolling",
+    method: Literal["rolling", "ema", "savgol"] = "rolling",
     groupby_col: Optional[str] = None,
     **kwargs,
 ) -> pd.DataFrame:
@@ -42,5 +42,39 @@ def smooth(
     return apply_method_to_groups(df, x, y, method_func, groupby_col, **kwargs)
 
 
+def smooth_sequential(
+    df: pd.DataFrame,
+    x: str,
+    y: str,
+    stages: List[Tuple[str, Dict[str, Any]]],
+    groupby_col: Optional[str] = None,
+    output_suffix: str = "_smooth",
+) -> pd.DataFrame:
+    """
+    Apply multiple smoothing methods in sequence.
+
+    Parameters:
+    - stages: List of (method_name, parameters) tuples
+    - output_suffix: Suffix for the final smoothed column
+
+    Returns:
+    - DataFrame with final smoothed column named {y}{output_suffix}
+    """
+    result_df = df.copy()
+
+    for i, (method_name, params) in enumerate(stages):
+        if method_name not in SMOOTHING_METHODS:
+            raise ValueError(f"Unknown method: {method_name}")
+
+        method_func = SMOOTHING_METHODS[method_name]
+        df = apply_method_to_groups(df, x, y, method_func, groupby_col, **params)
+        # overwrite y to the new smoothed y for next iteration
+        df = df.assign(**{f"{y}": lambda d: d[f"{y}_smooth"]}).drop(columns=f"{y}_smooth")
+
+    result_df = result_df.assign(**{f"{y}{output_suffix}": df[y]})
+
+    return result_df
+
+
 # Export for direct use
-__all__ = ["smooth", "SMOOTHING_METHODS"]
+__all__ = ["smooth", "smooth_sequential", "SMOOTHING_METHODS"]

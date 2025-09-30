@@ -9,7 +9,7 @@ import pandas as pd
 import seaborn as sns
 
 if TYPE_CHECKING:
-    from matplotlib.figure import Figure
+    from matplotlib.axes import Axes
 
 
 def plot_fermentation_curves(
@@ -22,7 +22,9 @@ def plot_fermentation_curves(
     ylabel: Optional[str] = None,
     figsize: Tuple[int, int] = (10, 6),
     style: Literal["white", "dark", "whitegrid", "darkgrid", "ticks"] = "whitegrid",
-) -> Figure:
+    ax: Optional["Axes"] = None,
+    **kwargs,
+):
     """
     Plot fermentation curves with different samples distinguished by color.
 
@@ -43,25 +45,35 @@ def plot_fermentation_curves(
     ylabel : str, optional
         Y-axis label. If None, uses y column name
     figsize : tuple, default (10, 6)
-        Figure size as (width, height)
+        Figure size as (width, height). Only used when ax is None
     style : str, default 'whitegrid'
         Seaborn style
-
+    ax : matplotlib.axes.Axes, optional
+        Axes object to plot on. If None, creates new figure and axes
+    **kwargs : additional keyword arguments for seaborn.lineplot
     Returns
     -------
-    plt.Figure
-        The matplotlib figure object
+    matplotlib.figure.Figure or matplotlib.axes.Axes
+        Returns Figure if ax is None (new figure created), otherwise returns the provided Axes
     """
     sns.set_style(style)
-    fig, ax = plt.subplots(figsize=figsize)
 
-    sns.lineplot(data=data, x=x, y=y, hue=sample_col, ax=ax, linewidth=2, alpha=0.8)
+    if ax is None:
+        fig, ax = plt.subplots(figsize=figsize)
+        created_figure = True
+    else:
+        fig = ax.figure
+        created_figure = False
+
+    sns.lineplot(data=data, x=x, y=y, hue=sample_col, ax=ax, linewidth=2, **kwargs)
 
     ax.set_xlabel(xlabel if xlabel else x.replace("_", " ").title())
     ax.set_ylabel(ylabel if ylabel else y.replace("_", " ").title())
     ax.set_title(title if title else f"{y.replace('_', ' ').title()} Over {x.replace('_', ' ').title()} by Sample")
     ax.legend(title=sample_col.replace("_", " ").title(), bbox_to_anchor=(1.05, 1), loc="upper left")
 
-    plt.tight_layout()
-
-    return fig
+    if created_figure:
+        plt.tight_layout()
+        return fig
+    else:
+        return ax
