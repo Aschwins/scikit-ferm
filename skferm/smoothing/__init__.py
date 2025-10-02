@@ -4,6 +4,11 @@ import pandas as pd
 
 from .core import apply_method_to_groups
 from .methods import exponential_moving_average, rolling_average, savitzky_golay_smooth
+from .metrics import (
+    evaluate_smoothing_quality,
+    fit_quality_metrics,
+    total_variation,
+)
 
 # Registry for smoothing methods
 SMOOTHING_METHODS = {
@@ -60,21 +65,26 @@ def smooth_sequential(
     Returns:
     - DataFrame with final smoothed column named {y}{output_suffix}
     """
-    result_df = df.copy()
+    result_df = df.copy().assign(new_y=lambda d: d[y])  # Temporary column to hold intermediate y values
 
     for i, (method_name, params) in enumerate(stages):
         if method_name not in SMOOTHING_METHODS:
             raise ValueError(f"Unknown method: {method_name}")
 
         method_func = SMOOTHING_METHODS[method_name]
-        df = apply_method_to_groups(df, x, y, method_func, groupby_col, **params)
+        result_df = apply_method_to_groups(result_df, x, "new_y", method_func, groupby_col, **params)
         # overwrite y to the new smoothed y for next iteration
-        df = df.assign(**{f"{y}": lambda d: d[f"{y}_smooth"]}).drop(columns=f"{y}_smooth")
+        result_df = result_df.assign(new_y=lambda d: d["new_y_smooth"]).drop(columns="new_y_smooth")
 
-    result_df = result_df.assign(**{f"{y}{output_suffix}": df[y]})
-
-    return result_df
+    return result_df.rename(columns={"new_y": f"{y}{output_suffix}"})
 
 
 # Export for direct use
-__all__ = ["smooth", "smooth_sequential", "SMOOTHING_METHODS"]
+__all__ = [
+    "smooth",
+    "smooth_sequential",
+    "SMOOTHING_METHODS",
+    "total_variation",
+    "fit_quality_metrics",
+    "evaluate_smoothing_quality",
+]
