@@ -42,12 +42,14 @@ The cleaned dataset is in long format with the following columns:
 **Micro Titer Plate (MTP) pH Dataset**
 
 The MTP pH dataset includes pH measurements taken over time from fermentations conducted in 96 well microtiter plates. This data is useful for analyzing the acidification process during fermentation.
+
 .. figure:: _static/mtp_ph_data.png
    :width: 600px
    :align: center
    :alt: Raw MTP pH Data showing pH over time for different samples
 
 .. code-block:: python
+
    from skferm.datasets.rheolaser import load_mtp_ph_data
 
    # Load the MTP pH dataset
@@ -57,6 +59,7 @@ The MTP pH dataset includes pH measurements taken over time from fermentations c
    # Shows columns: sample_id, design_id, plate, well, row, column, time, ph
 
 The cleaned dataset is in long format with the following columns:
+
 * ``sample_id``: Identifier for each fermentation sample
 * ``design_id``: Identifier for the experimental design
 * ``plate``: Plate number

@@ -20,6 +20,14 @@ skferm.smoothing.methods module
    :undoc-members:
    :show-inheritance:
 
+skferm.smoothing.metrics module
+-------------------------------
+
+.. automodule:: skferm.smoothing.metrics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Module contents
 ---------------
 

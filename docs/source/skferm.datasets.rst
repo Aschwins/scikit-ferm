@@ -4,6 +4,14 @@ skferm.datasets package
 Submodules
 ----------
 
+skferm.datasets.mtp\_ph module
+------------------------------
+
+.. automodule:: skferm.datasets.mtp_ph
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 skferm.datasets.rheolaser module
 --------------------------------
 
