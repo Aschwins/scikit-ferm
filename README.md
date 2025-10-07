@@ -1,7 +1,7 @@
 ![sphinx](https://github.com/aschwins/scikit-ferm/actions/workflows/sphinx.yml/badge.svg?branch=main)
 ![tests](https://github.com/aschwins/scikit-ferm/actions/workflows/pytest.yml/badge.svg?branch=main)
 ![type_checks](https://github.com/aschwins/scikit-ferm/actions/workflows/pyright.yml/badge.svg?branch=main)
-![release](https://github.com/aschwins/scikit-ferm/actions/workflows/release.yml/badge.svg?branch=main)
+![release](https://github.com/aschwins/scikit-ferm/actions/workflows/release.yml/badge.svg)
 
 
 ![](https://img.shields.io/pypi/pyversions/scikit-ferm)
@@ -14,7 +14,7 @@
 <a href="https://aschwins.github.io/scikit-lego/"><img src="images/logo.png" width="60%" height="60%" align="center" /></a>
 
 
-The official documentation is hosted [here](https://aschwins.github.io/scikit-ferm/).
+📚 **The official documentation is hosted [here](https://aschwins.github.io/scikit-ferm/).** 📚
 
 ## Installation
 
@@ -36,9 +36,7 @@ uv sync
 | Use Case | Modules | Notebook | Documentation |
 |----------|---------|----------|---------------|
 | Generate synthetic fermentation datasets | •[`skferm.datasets.generate_synthetic_growth`](skferm/datasets/synthetic.py)<br> •[`skferm.datasets.rheolaser`](skferm/datasets/rheolaser.py) | [📓 Notebook](notebooks/01-curve-smoothing.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/use-case-datasets.html) |
-| Growth modeling | • [`skferm.growth_models.gompertz`](skferm/growth_models/gompertz.py)<br>• [`skferm.growth_models.logistic`](skferm/growth_models/logistic.py) | [📓 Notebook](notebooks/02-gompertz-model.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/usage.html#growth_models) |
-| Curve smoothing | • [`skferm.curve_smoothing.smooth`](skferm/curve_smoothing/smooth.py) | [📓 Notebook](notebooks/03-curve-smoothing.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/usage.html#curve_smoothing) |
-
+| Curve smoothing | • [`skferm.smoothing`](skferm/smoothing/) | [📓 Notebook](notebooks/02_curve_smoothing.ipynb) | [📚 Docs](https://aschwins.github.io/scikit-ferm/use-case-curve-smoothing.html) |
 
 ## Examples
 
