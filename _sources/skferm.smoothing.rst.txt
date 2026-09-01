@@ -1,0 +1,37 @@
+skferm.smoothing package
+========================
+
+Submodules
+----------
+
+skferm.smoothing.core module
+----------------------------
+
+.. automodule:: skferm.smoothing.core
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+skferm.smoothing.methods module
+-------------------------------
+
+.. automodule:: skferm.smoothing.methods
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+skferm.smoothing.metrics module
+-------------------------------
+
+.. automodule:: skferm.smoothing.metrics
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: skferm.smoothing
+   :members:
+   :show-inheritance:
+   :undoc-members:

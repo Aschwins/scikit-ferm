@@ -1,0 +1,29 @@
+skferm.growth\_models package
+=============================
+
+Submodules
+----------
+
+skferm.growth\_models.gompertz module
+-------------------------------------
+
+.. automodule:: skferm.growth_models.gompertz
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+skferm.growth\_models.logistic module
+-------------------------------------
+
+.. automodule:: skferm.growth_models.logistic
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: skferm.growth_models
+   :members:
+   :show-inheritance:
+   :undoc-members:

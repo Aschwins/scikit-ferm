@@ -1,0 +1,744 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Curve Smoothing &#8212; scikit-ferm  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=7e37df36" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'use-case-curve-smoothing';</script>
+    <link rel="icon" href="_static/favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interpolation" href="use-case-interpolation.html" />
+    <link rel="prev" title="Datasets" href="use-case-datasets.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">scikit-ferm  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="skferm.html">
+    skferm package
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aschwins/scikit-ferm" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="usage.html">
+    Usage
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="skferm.html">
+    skferm package
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/aschwins/scikit-ferm" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="use-case-datasets.html">Datasets</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Curve Smoothing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="use-case-interpolation.html">Interpolation</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="usage.html" class="nav-link">Usage</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Curve Smoothing</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="curve-smoothing">
+<h1>Curve Smoothing<a class="headerlink" href="#curve-smoothing" title="Link to this heading">#</a></h1>
+<p>Fermentation data often contains noise that can obscure underlying biological trends. The <code class="docutils literal notranslate"><span class="pre">skferm.smoothing</span></code> module provides tools to reduce noise while preserving important signal characteristics.</p>
+<p>This guide demonstrates how to smooth fermentation curves using the built-in datasets and various smoothing methods.</p>
+<section id="overview-of-smoothing-methods">
+<h2>Overview of Smoothing Methods<a class="headerlink" href="#overview-of-smoothing-methods" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">skferm.smoothing</span></code> module includes three main smoothing methods:</p>
+<ul class="simple">
+<li><p><strong>Rolling Mean</strong> (<code class="docutils literal notranslate"><span class="pre">rolling</span></code>): Simple moving average over a fixed window</p></li>
+<li><p><strong>Exponential Moving Average</strong> (<code class="docutils literal notranslate"><span class="pre">ema</span></code>): Weighted average giving more importance to recent values</p></li>
+<li><p><strong>Savitzky-Golay Filter</strong> (<code class="docutils literal notranslate"><span class="pre">savgol</span></code>): Polynomial fitting method that preserves peaks and valleys</p></li>
+</ul>
+</section>
+<section id="basic-smoothing-example">
+<h2>Basic Smoothing Example<a class="headerlink" href="#basic-smoothing-example" title="Link to this heading">#</a></h2>
+<p>Let’s start with the Rheolaser dataset, which contains elasticity index measurements from fermentation experiments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skferm.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_rheolaser_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skferm.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_fermentation_curves</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skferm.smoothing</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth</span>
+
+<span class="c1"># Load the dataset</span>
+<span class="n">rheolaser_data</span> <span class="o">=</span> <span class="n">load_rheolaser_data</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Apply rolling mean smoothing (default method)</span>
+<span class="n">smoothed_data</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plot_fermentation_curves</span><span class="p">(</span>
+    <span class="n">smoothed_data</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Smoothed Rheolaser Elasticity Index&quot;</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index_smooth&quot;</span><span class="p">,</span>
+    <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Time (minutes)&quot;</span><span class="p">,</span>
+    <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Smoothed Elasticity Index&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">smooth()</span></code> function automatically applies the smoothing method to each group when <code class="docutils literal notranslate"><span class="pre">groupby_col</span></code> is specified. It adds a new column <code class="docutils literal notranslate"><span class="pre">elasticity_index_smooth</span></code> with the smoothed values. It always takes the original <code class="docutils literal notranslate"><span class="pre">y</span></code> name and appends <code class="docutils literal notranslate"><span class="pre">_smooth</span></code> to create the new column name.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/smoothed_rheolaser_example.png"><img alt="Raw MTP pH Data showing pH over time for different samples" src="_images/smoothed_rheolaser_example.png" style="width: 600px;" />
+</a>
+</figure>
+</section>
+<section id="available-smoothing-methods">
+<h2>Available Smoothing Methods<a class="headerlink" href="#available-smoothing-methods" title="Link to this heading">#</a></h2>
+<p>You can specify different smoothing methods and their parameters:</p>
+<p><strong>Rolling Mean Smoothing</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smoothed_data</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span>
+    <span class="n">window_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Exponential Moving Average</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smoothed_data</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;ema&quot;</span><span class="p">,</span>
+    <span class="n">span</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Savitzky-Golay Filter</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">smoothed_data</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;savgol&quot;</span><span class="p">,</span>
+    <span class="n">window_length</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">polyorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sequential-smoothing">
+<h2>Sequential Smoothing<a class="headerlink" href="#sequential-smoothing" title="Link to this heading">#</a></h2>
+<p>For heavily noisy data, you can apply multiple smoothing methods in sequence using <code class="docutils literal notranslate"><span class="pre">smooth_sequential()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skferm.smoothing</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth_sequential</span>
+
+<span class="c1"># Apply multiple smoothing stages</span>
+<span class="n">smoothed_data</span> <span class="o">=</span> <span class="n">smooth_sequential</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span>
+    <span class="n">stages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;window_size&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
+        <span class="p">(</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;window_size&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">}),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>Sequential smoothing applies each method in order, with each stage operating on the output of the previous stage. For the stages parameter, provide a list of tuples where each tuple contains the method name and a dictionary of its parameters.</p>
+<p><strong>Benefits of Sequential Smoothing:</strong></p>
+<ul class="simple">
+<li><p>Improved noise reduction by targeting different frequency components</p></li>
+<li><p>Flexibility to combine complementary smoothing approaches</p></li>
+<li><p>Better control over edge preservation</p></li>
+</ul>
+<p><strong>Risks of Sequential Smoothing:</strong></p>
+<ul class="simple">
+<li><p>Over-smoothing can remove important signal features</p></li>
+<li><p>Multiple passes can introduce phase distortion</p></li>
+<li><p>Results become sensitive to parameter order</p></li>
+</ul>
+</section>
+<section id="mtp-ph-dataset-example">
+<h2>MTP pH Dataset Example<a class="headerlink" href="#mtp-ph-dataset-example" title="Link to this heading">#</a></h2>
+<p>The MTP pH dataset contains measurements from multiple wells across different microtiter plates:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skferm.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_mtp_ph_data</span>
+
+<span class="c1"># Load MTP pH data</span>
+<span class="n">mtp_ph_data</span> <span class="o">=</span> <span class="n">load_mtp_ph_data</span><span class="p">()</span>
+
+<span class="c1"># Select a random design for demonstration</span>
+<span class="n">design_id</span> <span class="o">=</span> <span class="n">mtp_ph_data</span><span class="o">.</span><span class="n">design_id</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">subset_data</span> <span class="o">=</span> <span class="n">mtp_ph_data</span><span class="p">[</span><span class="n">mtp_ph_data</span><span class="p">[</span><span class="s2">&quot;design_id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">design_id</span><span class="p">]</span>
+
+<span class="c1"># Apply sequential smoothing</span>
+<span class="n">smoothed_mtp</span> <span class="o">=</span> <span class="n">smooth_sequential</span><span class="p">(</span>
+    <span class="n">subset_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;ph&quot;</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span>
+    <span class="n">stages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;savgol&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;window_length&quot;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;polyorder&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}),</span>
+        <span class="p">(</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;window_size&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}),</span>
+        <span class="p">(</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;window_size&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}),</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="when-smoothing-goes-wrong">
+<h2>When Smoothing Goes Wrong<a class="headerlink" href="#when-smoothing-goes-wrong" title="Link to this heading">#</a></h2>
+<p>Smoothing can introduce artifacts or remove important features if not applied carefully. Here are common problems:</p>
+<p><strong>Problem 1: Curve Shifting</strong></p>
+<p>Using exponential moving average followed by large rolling windows can shift curves:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This combination causes unwanted curve shifting</span>
+<span class="n">bad_smoothed</span> <span class="o">=</span> <span class="n">smooth_sequential</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span><span class="p">,</span>
+    <span class="n">stages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s2">&quot;ema&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;span&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">}),</span>      <span class="c1"># EMA introduces lag</span>
+        <span class="p">(</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;window_size&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}),</span>  <span class="c1"># Additional lag</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Problem 2: Over-smoothing</strong></p>
+<p>Too aggressive smoothing removes important biological features:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Over-smoothing example</span>
+<span class="n">over_smoothed</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span>
+    <span class="n">rheolaser_data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span>
+    <span class="n">window_size</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>  <span class="c1"># Too large window</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="evaluating-smoothing-quality">
+<h2>Evaluating Smoothing Quality<a class="headerlink" href="#evaluating-smoothing-quality" title="Link to this heading">#</a></h2>
+<p>Always evaluate your smoothing results using both visual inspection and quantitative metrics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skferm.smoothing</span><span class="w"> </span><span class="kn">import</span> <span class="n">evaluate_smoothing_quality</span>
+
+<span class="c1"># Calculate smoothing quality metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">evaluate_smoothing_quality</span><span class="p">(</span>
+    <span class="n">smoothed_data</span><span class="p">,</span>
+    <span class="n">x_col</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">original_col</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">smoothed_col</span><span class="o">=</span><span class="s2">&quot;elasticity_index_smooth&quot;</span><span class="p">,</span>
+    <span class="n">group_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">evaluate_smoothing_quality()</span></code> function returns several metrics:</p>
+<ul class="simple">
+<li><p><strong>Smoothness metrics</strong>: Total variation of original vs smoothed data</p></li>
+<li><p><strong>Fit quality</strong>: RMSE and R² between original and smoothed curves</p></li>
+</ul>
+<p><strong>Good smoothing should:</strong></p>
+<ul class="simple">
+<li><p>Reduce total variation (smoother curve)</p></li>
+<li><p>Maintain high R² (preserve signal shape)</p></li>
+<li><p>Keep RMSE low (minimal distortion)</p></li>
+</ul>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Always visualize results</strong>: Plot original and smoothed data together to check for artifacts</p></li>
+<li><p><strong>Start with gentle smoothing</strong>: Use small window sizes first, then increase if needed</p></li>
+<li><p><strong>Consider your data characteristics</strong>:
+- High-frequency noise → rolling mean or Savitzky-Golay
+- Trending data → exponential moving average
+- Preserve peaks → Savitzky-Golay</p></li>
+<li><p><strong>Use metrics to guide decisions</strong>: Monitor total variation and fit quality</p></li>
+<li><p><strong>Test different methods</strong>: What works for one dataset may not work for another</p></li>
+<li><p><strong>Be cautious with sequential smoothing</strong>: Each additional stage increases the risk of over-smoothing</p></li>
+</ol>
+</section>
+<section id="example-complete-workflow">
+<h2>Example: Complete Workflow<a class="headerlink" href="#example-complete-workflow" title="Link to this heading">#</a></h2>
+<p>Here’s a complete example showing the recommended workflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skferm.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_rheolaser_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skferm.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot_fermentation_curves</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skferm.smoothing</span><span class="w"> </span><span class="kn">import</span> <span class="n">smooth</span><span class="p">,</span> <span class="n">evaluate_smoothing_quality</span>
+
+<span class="c1"># 1. Load and examine data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_rheolaser_data</span><span class="p">(</span><span class="n">clean</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># 2. Try gentle smoothing first</span>
+<span class="n">smoothed</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s2">&quot;rolling&quot;</span><span class="p">,</span>
+    <span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">groupby_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 3. Evaluate quality</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">evaluate_smoothing_quality</span><span class="p">(</span>
+    <span class="n">smoothed</span><span class="p">,</span>
+    <span class="n">x_col</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+    <span class="n">original_col</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">smoothed_col</span><span class="o">=</span><span class="s2">&quot;elasticity_index_smooth&quot;</span><span class="p">,</span>
+    <span class="n">group_col</span><span class="o">=</span><span class="s2">&quot;sample_id&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># 4. Visualize results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot subset for clarity</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;sample_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;E1&quot;</span><span class="p">])]</span>
+<span class="n">smoothed_subset</span> <span class="o">=</span> <span class="n">smoothed</span><span class="p">[</span><span class="n">smoothed</span><span class="p">[</span><span class="s2">&quot;sample_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="s2">&quot;E1&quot;</span><span class="p">])]</span>
+
+<span class="c1"># Original data</span>
+<span class="n">plot_fermentation_curves</span><span class="p">(</span>
+    <span class="n">subset</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Original Data&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span>
+<span class="p">)</span>
+
+<span class="c1"># Smoothed data</span>
+<span class="n">plot_fermentation_curves</span><span class="p">(</span>
+    <span class="n">smoothed_subset</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;elasticity_index_smooth&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Smoothed Data&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 5. Check metrics and adjust if needed</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Smoothing Quality Metrics:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This workflow ensures you apply smoothing systematically while maintaining data quality.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="use-case-datasets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Datasets</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="use-case-interpolation.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Interpolation</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview-of-smoothing-methods">Overview of Smoothing Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-smoothing-example">Basic Smoothing Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-smoothing-methods">Available Smoothing Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-smoothing">Sequential Smoothing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mtp-ph-dataset-example">MTP pH Dataset Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-smoothing-goes-wrong">When Smoothing Goes Wrong</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluating-smoothing-quality">Evaluating Smoothing Quality</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-complete-workflow">Example: Complete Workflow</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/use-case-curve-smoothing.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Aschwin Schilperoort.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
